@@ -1,0 +1,65 @@
+{% load static %}
+<div id="contact-form-container">
+    <form hx-post="{% url 'core:contact' %}" hx-swap="outerHTML" hx-target="#contact-form-container">
+        {% csrf_token %}
+        
+        <div class="space-y-6">
+            <div>
+                <label class="block text-gray-400 text-sm mb-2">Nombre completo</label>
+                <input type="text" name="name" required 
+                       class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded text-white focus:border-butter-red focus:outline-none transition"
+                       placeholder="Tu nombre"
+                       value="{{ request.POST.name }}">
+                {% if errors.name %}
+                <p class="text-red-500 text-sm mt-1">{{ errors.name }}</p>
+                {% endif %}
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-gray-400 text-sm mb-2">Email</label>
+                    <input type="email" name="email" required 
+                           class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded text-white focus:border-butter-red focus:outline-none transition"
+                           placeholder="tu@email.com"
+                           value="{{ request.POST.email }}">
+                    {% if errors.email %}
+                    <p class="text-red-500 text-sm mt-1">{{ errors.email }}</p>
+                    {% endif %}
+                </div>
+                <div>
+                    <label class="block text-gray-400 text-sm mb-2">Teléfono (opcional)</label>
+                    <input type="tel" name="phone" 
+                           class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded text-white focus:border-butter-red focus:outline-none transition"
+                           placeholder="+34 666 666 666"
+                           value="{{ request.POST.phone }}">
+                </div>
+            </div>
+            
+            <div>
+                <label class="block text-gray-400 text-sm mb-2">Tipo de clase</label>
+                <select name="service_type" 
+                        class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded text-white focus:border-butter-red focus:outline-none transition">
+                    <option value="">Selecciona una opción</option>
+                    <option value="defensa_personal" {% if request.POST.service_type == 'defensa_personal' %}selected{% endif %}>Defensa Personal</option>
+                    <option value="jiujitsu" {% if request.POST.service_type == 'jiujitsu' %}selected{% endif %}>Jiu-Jitsu</option>
+                    <option value="boxeo" {% if request.POST.service_type == 'boxeo' %}selected{% endif %}>Boxeo</option>
+                    <option value="mma" {% if request.POST.service_type == 'mma' %}selected{% endif %}>MMA</option>
+                </select>
+            </div>
+            
+            <div>
+                <label class="block text-gray-400 text-sm mb-2">Mensaje</label>
+                <textarea name="message" required rows="4" 
+                          class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded text-white focus:border-butter-red focus:outline-none transition"
+                          placeholder="Cuéntame sobre tus objetivos de entrenamiento...">{{ request.POST.message }}</textarea>
+                {% if errors.message %}
+                <p class="text-red-500 text-sm mt-1">{{ errors.message }}</p>
+                {% endif %}
+            </div>
+            
+            <button type="submit" class="btn-primary w-full py-4 rounded text-white font-display text-lg uppercase tracking-wider">
+                Enviar Mensaje
+            </button>
+        </div>
+    </form>
+</div>

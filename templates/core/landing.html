@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adrián Gálvez "The Butcher" | MMA Profesional - Entrenador Alicante</title>
+    <meta name="description" content="Adrián Gálvez 'The Butcher'. Luchador y entrenador profesional de MMA, Jiu-Jitsu, Boxeo y Defensa Personal en Alicante. Clases particulares. Entrena con un campeón!">
+    <meta name="keywords" content="Adrián Gálvez, The Butcher, MMA Alicante, artes marciales mixtas, Jiu-Jitsu, boxeo, defensa personal, entrenador MMA, UFC, PFL, WAR, luchador profesional, fight club Alicante, jiujitsu brasileiro, artes marciales, deporte de combate, entrenamiento deportivo, Alicante">
+    <meta name="author" content="Adrián Gálvez - The Butcher">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Spanish">
+    <meta name="revisit-after" content="7 days">
+    <meta name="geo.region" content="ES-A">
+    <meta name="geo.placename" content="Alicante">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Adrián Gálvez 'The Butcher' | MMA Profesional">
+    <meta property="og:description" content="Luchador y entrenador profesional de MMA en Alicante. ¡ENTRA CON LOS CAMPEONES!">
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="https://adrigalvez.com">
+    <meta property="og:image" content="https://adrigalvez.com/images/hero.jpg">
+    <meta property="og:site_name" content="Adrián Gálvez">
+    <meta property="og:locale" content="es_ES">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Adrián Gálvez The Butcher MMA">
+    <meta name="twitter:description" content="Luchador profesional MMA - Alicante">
+    <meta name="twitter:site" content="@adrigalvez17">
+    <meta name="twitter:creator" content="@adrigalvez17">
+    
+    <link rel="canonical" href="https://adrigalvez.com">
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Adrián Gálvez",
+        "alternateName": "The Butcher",
+        "jobTitle": "Entrenador Profesional MMA / Luchador",
+        "description": "Luchador profesional de MMA, instructor de Jiu-Jitsu, Boxeo y Defensa Personal en Alicante. Competidor en UFC, PFL, WAR y circuitos profesionales.",
+        "url": "https://adrigalvez.com",
+        "image": "https://adrigalvez.com/images/adri-sangriento.jpg",
+        "sameAs": [
+            "https://instagram.com/adrigalvez17"
+        ],
+        "knowsAbout": [
+            "MMA",
+            "Jiu-Jitsu",
+            "Boxeo",
+            "Defensa Personal",
+            "UFC",
+            "PFL",
+            "WAR"
+        ],
+        "Sport": "https://en.wikipedia.org/wiki/Mixed_martial_arts"
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Adrián Gálvez - The Butcher",
+        "description": "Entrenador profesional de MMA, Jiu-Jitsu, Boxeo y Defensa Personal",
+        "url": "https://adrigalvez.com",
+        "telephone": "+34666666666",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Alicante",
+            "addressRegion": "Alicante",
+            "addressCountry": "ES"
+        },
+        "priceRange": "€€"
+    }
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'butcher-red': '#c41e3a',
+                        'butcher-dark': '#0d0d0d',
+                        'butcher-gray': '#1a1a1a',
+                        'butcher-gold': '#d4af37',
+                    },
+                    fontFamily: {
+                        'display': ['Oswald', 'sans-serif'],
+                        'body': ['Roboto', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background-color: #0d0d0d; color: #e5e5e5; font-family: 'Roboto', sans-serif; }
+        
+        /* Parallax */
+        .parallax {
+            position: relative;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero-parallax {
+            background-image: linear-gradient(180deg, rgba(13,13,13,0.75) 0%, rgba(13,13,13,0.4) 50%, rgba(13,13,13,0.9) 100%),
+                        url('/media/multimedia/photos/adri-sangriento.webp');
+            background-size: cover;
+            background-position: center top;
+        }
+        
+        .about-parallax {
+            background-image: linear-gradient(90deg, rgba(13,13,13,0.95) 0%, rgba(13,13,13,0.85) 50%, rgba(13,13,13,0.95) 100%),
+                        url('/media/multimedia/photos/Captura desde 2026-04-23 17-31-34.png');
+            background-size: cover;
+            background-position: center right;
+        }
+        
+        .club-parallax {
+            background-image: linear-gradient(180deg, rgba(13,13,13,0.85) 0%, rgba(13,13,13,0.95) 100%),
+                        url('/media/multimedia/photos/adri-campeon.png');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .gallery-parallax {
+            background-image: linear-gradient(180deg, rgba(13,13,13,0.9) 0%, rgba(13,13,13,0.95) 100%),
+                        url('/media/multimedia/photos/Captura desde 2026-03-29 18-19-50.png');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .overlay { background: linear-gradient(135deg, rgba(13,13,13,0.95) 0%, rgba(26,26,26,0.9) 100%); }
+        
+        .blood-drip {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, #0d0d0d 0%, transparent 100%);
+        }
+        
+        .service-card {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(196, 30, 58, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: #c41e3a;
+            box-shadow: 0 20px 40px rgba(196, 30, 58, 0.3);
+        }
+        
+        .gallery-item { position: relative; overflow: hidden; border-radius: 4px; }
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(196, 30, 58, 0.8) 0%, rgba(13,13,13,0.9) 100%);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 10;
+        }
+        .gallery-item:hover::before { opacity: 1; }
+        .gallery-item img { transition: transform 0.6s ease; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        
+        .gold-text {
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 50%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .red-accent { color: #c41e3a; }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-primary:hover::before { left: 100%; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(196, 30, 58, 0.5); }
+        
+        nav { background: rgba(13, 13, 13, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(196, 30, 58, 0.2); }
+        nav.scrolled { background: rgba(13, 13, 13, 0.98); }
+        
+        .section-title { position: relative; display: inline-block; }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #c41e3a, transparent);
+        }
+        
+        .form-input {
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: #c41e3a;
+            box-shadow: 0 0 20px rgba(196, 30, 58, 0.2);
+            outline: none;
+        }
+        
+        .pattern-bg {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(196, 30, 58, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+        }
+
+        .keyword { color: #d4af37; font-weight: 600; }
+        .seo-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(196, 30, 58, 0.2);
+            border: 1px solid rgba(196, 30, 58, 0.4);
+            border-radius: 20px;
+            font-size: 12px;
+            color: #e5e5e5;
+            margin: 2px;
+        }
+
+        .sponsor-card {
+            background: rgba(26, 26, 26, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .sponsor-card:hover {
+            border-color: rgba(196, 30, 58, 0.3);
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="pattern-bg">
+    
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <span class="font-display text-2xl font-bold text-white tracking-wider">
+                        ADRIÁN <span class="red-accent">GÁLVEZ</span>
+                    </span>
+                    <span class="ml-2 text-xs text-red-500 font-display uppercase tracking-[0.3em]">"The Butcher"</span>
+                </div>
+                
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#inicio" class="text-gray-300 hover:text-white transition text-sm uppercase tracking-wider">Inicio</a>
+                    <a href="#club" class="text-gray-300 hover:text-white transition text-sm uppercase tracking-wider">El Club</a>
+                    <a href="#sobre-mi" class="text-gray-300 hover:text-white transition text-sm uppercase tracking-wider">Sobre Mí</a>
+                    <a href="#servicios" class="text-gray-300 hover:text-white transition text-sm uppercase tracking-wider">Servicios</a>
+                    <a href="#galeria" class="text-gray-300 hover:text-white transition text-sm uppercase tracking-wider">Galería</a>
+                    <a href="#contacto" class="btn-primary px-6 py-2.5 rounded text-white font-display text-sm uppercase tracking-wider">
+                        Contactar
+                    </a>
+                </div>
+                
+                <button class="lg:hidden text-gray-300" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-butter-dark/98 border-t border-red-900/30">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#inicio" class="block text-gray-300 hover:text-white">Inicio</a>
+                <a href="#sobre-mi" class="block text-gray-300 hover:text-white">Sobre Mí</a>
+                <a href="#servicios" class="block text-gray-300 hover:text-white">Servicios</a>
+                <a href="#galeria" class="block text-gray-300 hover:text-white">Galería</a>
+                <a href="#contacto" class="block text-red-500 font-medium">Contactar</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="parallax hero-parallax min-h-screen flex items-center justify-center">
+        <div class="blood-drip"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10 relative">
+            <!-- SEO Keywords -->
+            <div class="flex flex-wrap justify-center gap-2 mb-6">
+                <span class="seo-tag">MMA Alicante</span>
+                <span class="seo-tag">UFC</span>
+                <span class="seo-tag">PFL</span>
+                <span class="seo-tag">Jiu-Jitsu</span>
+                <span class="seo-tag">Boxeo</span>
+                <span class="seo-tag">Defensa Personal</span>
+            </div>
+            
+            <div class="inline-block px-5 py-2 border border-red-900/50 rounded-full bg-red-900/10 backdrop-blur-sm text-red-500 md:text-xl lg:text-2xl font-display uppercase tracking-[0.4em] mb-6">
+                Luchador Profesional MMA
+            </div>
+            
+            <h1 class="font-display text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-2 tracking-tight">
+                ADRIÁN <span class="red-accent">GÁLVEZ</span>
+            </h1>
+            
+            <p class="font-display text-3xl md:text-4xl gold-text uppercase tracking-[0.2em] mb-6">
+                "The Butcher"
+            </p>
+            
+            <div class="w-24 h-1 bg-gradient-to-r from-red-900 via-red-600 to-red-900 mx-auto mb-6"></div>
+            
+            <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
+                Luchador profesional de <span class="text-white font-medium">MMA</span>, 
+                <span class="text-white font-medium">Entrenador de Jiu-Jitsu</span>, 
+                <span class="text-white font-medium">Boxeo</span> y 
+                <span class="text-white font-medium">MMA</span> en Alicante
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-5 justify-center">
+                <a href="#contacto" class="btn-primary px-10 py-4 rounded text-white font-display text-lg uppercase tracking-wider inline-block">
+                    Reservar Clase
+                </a>
+                <a href="#servicios" class="border-2 border-gray-600 px-10 py-4 rounded text-gray-300 font-display text-lg uppercase tracking-wider hover:border-white hover:text-white transition inline-block">
+                    Ver Servicios
+                </a>
+            </div>
+            
+            <!-- Social Links -->
+            <div class="flex justify-center gap-5 mt-12">
+                <a href="https://instagram.com/adrigalvez17" target="_blank" class="w-12 h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center hover:bg-red-900/50 hover:border-red-700 transition all">
+                    <i class="fab fa-instagram text-gray-300 hover:text-white"></i>
+                </a>
+                <a href="#" class="w-12 h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center hover:bg-red-900/50 hover:border-red-700 transition all">
+                    <i class="fab fa-facebook text-gray-300 hover:text-white"></i>
+                </a>
+                <a href="#" class="w-12 h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center hover:bg-red-900/50 hover:border-red-700 transition all">
+                    <i class="fab fa-youtube text-gray-300 hover:text-white"></i>
+                </a>
+            </div>
+            
+            <p class="text-gray-500 text-sm mt-4">@adrigalvez17</p>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div class="w-6 h-10 border-2 border-gray-500 rounded-full flex justify-center pt-2">
+                <div class="w-1 h-3 bg-gray-400 rounded-full animate-pulse"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Club Section -->
+    <section id="club" class="parallax club-parallax py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="red-accent font-display uppercase tracking-widest text-sm">El Club</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white mt-2 mb-4">
+                    CLIMENT <span class="gold-text">CLUB</span> ALICANTE
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Más de 10 años formando luchadores y atletas de élite en la provincia de Alicante
+                </p>
+            </div>
+            
+            <!-- Photos with Climent Brothers -->
+            <div class="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto mb-12">
+                <div class="relative rounded-lg overflow-hidden">
+                    <img src="/media/multimedia/photos/equipo-climent.png" 
+                         alt="Equipo Climent" 
+                         class="w-full h-80 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end justify-center pb-6">
+                        <p class="text-white font-display text-2xl font-bold">Equipo <span class="gold-text">Climent</span></p>
+                    </div>
+                </div>
+                <div class="relative rounded-lg overflow-hidden">
+                    <img src="/media/multimedia/photos/adri-jorge-agus.png" 
+                         alt="Adrián con Agustín y Jorge" 
+                         class="w-full h-80 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end justify-center pb-6">
+                        <p class="text-white font-display text-2xl font-bold"><span class="gold-text">Jorge</span> <span class="text-gray-400">&</span> <span class="gold-text">Agustín</span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-6 text-center">
+                <div class="p-6">
+                    <p class="font-display text-4xl font-bold red-accent">10+</p>
+                    <p class="text-gray-400">Años de experiencia</p>
+                </div>
+                <div class="p-6">
+                    <p class="font-display text-4xl font-bold gold-text">500+</p>
+                    <p class="text-gray-400">Alumnos formados</p>
+                </div>
+                <div class="p-6">
+                    <p class="font-display text-4xl font-bold text-white">50+</p>
+                    <p class="text-gray-400">Luchadores profesionales</p>
+                </div>
+                <div class="p-6">
+                    <p class="font-display text-4xl font-bold text-gray-400">100+</p>
+                    <p class="text-gray-400">Títulos ganados</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <p class="text-gray-400 mb-6">Colaboradores y aliados</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
+                    <div class="sponsor-card p-4 rounded-lg flex items-center justify-center text-center">
+                        <div>
+                            <i class="fas fa-dumbbell text-3xl text-gray-600 mb-2"></i>
+                            <p class="text-gray-500 text-sm">Gimnasio</p>
+                        </div>
+                    </div>
+                    <div class="sponsor-card p-4 rounded-lg flex items-center justify-center text-center">
+                        <div>
+                            <i class="fas fa-tshirt text-3xl text-gray-600 mb-2"></i>
+                            <p class="text-gray-500 text-sm">Marca</p>
+                        </div>
+                    </div>
+                    <div class="sponsor-card p-4 rounded-lg flex items-center justify-center text-center">
+                        <div>
+                            <i class="fas fa-utensils text-3xl text-gray-600 mb-2"></i>
+                            <p class="text-gray-500 text-sm">Nutrición</p>
+                        </div>
+                    </div>
+                    <div class="sponsor-card p-4 rounded-lg flex items-center justify-center text-center">
+                        <div>
+                            <i class="fas fa-heartbeat text-3xl text-gray-600 mb-2"></i>
+                            <p class="text-gray-500 text-sm">Salud</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="sobre-mi" class="parallax about-parallax py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="relative">
+                    <div class="relative z-10">
+                        <img src="/media/multimedia/photos/adri-guardia.jpeg" 
+                             alt="Adrián Gálvez - The Butcher" 
+                             class="rounded-lg shadow-2xl w-full max-w-md mx-auto border-2 border-red-900/30">
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 bg-gradient-to-br from-red-900 to-red-700 p-6 rounded-lg shadow-xl z-20 hidden md:block">
+                        <p class="font-display text-4xl font-bold text-white">10+</p>
+                        <p class="text-gray-300 text-sm">Años de experiencia</p>
+                    </div>
+                    <div class="absolute -top-6 -left-6 border-2 border-red-900/50 rounded-lg w-full h-full hidden md:block"></div>
+                </div>
+                
+                <div class="overlay p-8 rounded-lg backdrop-blur-sm">
+                    <span class="red-accent font-display uppercase tracking-widest text-sm">Sobre Mí</span>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-white mt-2 mb-6">
+                        LUCHA CON <span class="gold-text"> INTENCIÓN</span>
+                    </h2>
+                    
+                    <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                        Soy <span class="text-white font-medium">Adrián Gálvez</span>, conocido como <span class="red-accent font-medium">"The Butcher"</span>. 
+                        Luchador profesional de MMA con una trayectoria marcada por la disciplina, el sacrificio y la pasión por las artes marciales.
+                    </p>
+                    
+                    <p class="text-gray-400 leading-relaxed mb-8">
+                        He dedicado mi vida a dominar las técnicas de combate y ahora mi misión es ayudarte a alcanzar tu máximo potencial, 
+                        ya sea para competencia o para protección personal.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check-circle red-accent text-lg"></i>
+                            <span class="text-gray-300">MMA Competitivo</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check-circle red-accent text-lg"></i>
+                            <span class="text-gray-300">Jiu-Jitsu Brasilero</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check-circle red-accent text-lg"></i>
+                            <span class="text-gray-300">Boxeo</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check-circle red-accent text-lg"></i>
+                            <span class="text-gray-300">Defensa Personal</span>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-red-900/30 pt-6">
+                        <h3 class="font-display text-lg text-white mb-3">LOGROS</h3>
+                        <p class="text-gray-400 text-sm">Campeón de España Amateur IMAF 2021, WAR y circuitos profesionales.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="py-32 bg-butter-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="red-accent font-display uppercase tracking-widest text-sm">Servicios</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white mt-2 mb-4">
+                    ENTRENAMIENTOS <span class="gold-text">ESPECIALIZADOS</span>
+                </h2>
+                <p class="text-gray-400">Clases particulares adaptadas a tu nivel y objetivos</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="service-card p-6 rounded-lg text-center">
+                    <div class="w-16 h-16 bg-red-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt red-accent text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white mb-2">Defensa Personal</h3>
+                    <p class="text-gray-400 text-sm mb-4">Técnicas de protección y control</p>
+                </div>
+                <div class="service-card p-6 rounded-lg text-center">
+                    <div class="w-16 h-16 bg-red-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-hand-rock red-accent text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white mb-2">Jiu-Jitsu</h3>
+                    <p class="text-gray-400 text-sm mb-4">Arte brasilero - Gi & No-Gi</p>
+                </div>
+                <div class="service-card p-6 rounded-lg text-center">
+                    <div class="w-16 h-16 bg-red-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-boxing-glove red-accent text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white mb-2">Boxeo</h3>
+                    <p class="text-gray-400 text-sm mb-4">Técnicas de puño</p>
+                </div>
+                <div class="service-card p-6 rounded-lg text-center">
+                    <div class="w-16 h-16 bg-red-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-fist-raised red-accent text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white mb-2">MMA</h3>
+                    <p class="text-gray-400 text-sm mb-4">Artes marciales mixtas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Momentos Section -->
+    <section class="py-24 bg-butter-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="red-accent font-display uppercase tracking-widest text-sm"> Moments</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white mt-2 mb-4">
+                    EN <span class="gold-text">ACCIÓN</span>
+                </h2>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <img src="/media/multimedia/photos/Imagen pegada.png" 
+                     alt="Adrián Gálvez en acción" 
+                     class="w-full rounded-lg shadow-2xl">
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galeria" class="parallax gallery-parallax py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="red-accent font-display uppercase tracking-widest text-sm">Galería</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white mt-2 mb-4">
+                    MOMENTOS EN <span class="red-accent">EL RING</span>
+                </h2>
+                <p class="text-gray-400">Entrenamientos, combates y más</p>
+            </div>
+            
+            <!-- Gallery Tabs -->
+            <div class="flex justify-center gap-4 mb-10">
+                <button onclick="showGallery('fotos')" 
+                        id="btn-fotos"
+                        class="px-8 py-3 bg-gradient-to-r from-red-900 to-red-700 text-white rounded font-display uppercase tracking-wider">
+                    Fotos
+                </button>
+                <button onclick="showGallery('videos')" 
+                        id="btn-videos"
+                        class="px-8 py-3 bg-gray-800 text-gray-300 rounded font-display uppercase tracking-wider hover:bg-gray-700 transition">
+                    Videos
+                </button>
+            </div>
+            
+            <!-- Photos Grid -->
+            <div id="gallery-fotos" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="gallery-item aspect-square cursor-pointer">
+                    <img src="/media/multimedia/photos/adri-sangriento.jpg" alt="Adrian Gálvez" class="w-full h-full object-cover">
+                </div>
+                <div class="gallery-item aspect-square cursor-pointer">
+                    <img src="/media/multimedia/photos/adri-sangriento.jpg" alt="The Butcher" class="w-full h-full object-cover">
+                </div>
+                <div class="gallery-item aspect-square cursor-pointer">
+                    <img src="/media/multimedia/photos/adri-sangriento.jpg" alt="MMA" class="w-full h-full object-cover">
+                </div>
+                <div class="gallery-item aspect-square cursor-pointer">
+                    <img src="/media/multimedia/photos/adri-sangriento.jpg" alt="Entrenamiento" class="w-full h-full object-cover">
+                </div>
+            </div>
+            
+            <!-- Videos Grid -->
+            <div id="gallery-videos" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="col-span-full text-center py-20">
+                    <i class="fas fa-video text-6xl text-gray-700 mb-4"></i>
+                    <p class="text-gray-500">Videos pronto disponibles</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="py-32 overlay">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <div>
+                    <span class="red-accent font-display uppercase tracking-widest text-sm">Contacto</span>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-white mt-2 mb-6">
+                        EMPIEZA TU <span class="gold-text">TRANSFORMACIÓN</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg mb-8">
+                        ¿Listo para entrenar? Reserva tu clase particular y comienza tu journey hacia la maestría marcial.
+                    </p>
+                    
+                    <div class="space-y-5 mb-8">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-red-900/20 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-envelope red-accent"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 text-xs">Email</p>
+                                <p class="text-white">contacto@adrigalvez.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-red-900/20 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-phone red-accent"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 text-xs">Teléfono</p>
+                                <p class="text-white">+34 666 666 666</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-red-900/20 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-map-marker-alt red-accent"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 text-xs">Ubicación</p>
+                                <p class="text-white">Alicante - Climent Club</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <p class="text-gray-500 text-sm mb-4">Sígueme en redes</p>
+                        <div class="flex gap-3">
+                            <a href="https://instagram.com/adrigalvez17" target="_blank" class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gradient-to-r hover:from-red-600 hover:to-pink-600 transition">
+                                <i class="fab fa-instagram text-white"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition">
+                                <i class="fab fa-facebook text-white"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-red-600 transition">
+                                <i class="fab fa-youtube text-white"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="bg-gray-900/50 p-8 rounded-lg border border-red-900/20">
+                    <form hx-post="{% url 'core:contact' %}" hx-swap="outerHTML" hx-target="#contact-form-container">
+                        {% csrf_token %}
+                        
+                        <div class="space-y-5">
+                            <div>
+                                <label class="block text-gray-400 text-sm mb-2">Nombre completo</label>
+                                <input type="text" name="name" required 
+                                       class="form-input w-full px-4 py-3 rounded text-white"
+                                       placeholder="Tu nombre">
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-gray-400 text-sm mb-2">Email</label>
+                                    <input type="email" name="email" required 
+                                           class="form-input w-full px-4 py-3 rounded text-white"
+                                           placeholder="tu@email.com">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-400 text-sm mb-2">Teléfono</label>
+                                    <input type="tel" name="phone" 
+                                           class="form-input w-full px-4 py-3 rounded text-white"
+                                           placeholder="+34 666 666 666">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-400 text-sm mb-2">Tipo de clase</label>
+                                <select name="service_type" 
+                                        class="form-input w-full px-4 py-3 rounded text-white">
+                                    <option value="">Selecciona una opción</option>
+                                    <option value="defensa_personal">Defensa Personal</option>
+                                    <option value="jiujitsu">Jiu-Jitsu</option>
+                                    <option value="boxeo">Boxeo</option>
+                                    <option value="mma">MMA</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-400 text-sm mb-2">Mensaje</label>
+                                <textarea name="message" required rows="4" 
+                                          class="form-input w-full px-4 py-3 rounded text-white"
+                                          placeholder="¿Qué quieres aprender?"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary w-full py-4 rounded text-white font-display text-lg uppercase tracking-wider">
+                                Enviar Mensaje
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-red-900/20 bg-butter-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-center md:text-left mb-6 md:mb-0">
+                    <p class="font-display text-2xl font-bold text-white">ADRIÁN <span class="red-accent">GÁLVEZ</span></p>
+                    <p class="text-gray-500 text-sm">"The Butcher" | Entrenador Profesional</p>
+                </div>
+                
+                <div class="flex gap-8">
+                    <a href="#inicio" class="text-gray-500 hover:text-white transition text-sm">Inicio</a>
+                    <a href="#servicios" class="text-gray-500 hover:text-white transition text-sm">Servicios</a>
+                    <a href="#contacto" class="text-gray-500 hover:text-white transition text-sm">Contacto</a>
+                </div>
+            </div>
+            
+            <div class="border-t border-red-900/10 mt-8 pt-8 text-center">
+                <p class="text-gray-600 text-sm">&copy; 2026 Adrián Gálvez. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        function showGallery(type) {
+            const fotosGrid = document.getElementById('gallery-fotos');
+            const videosGrid = document.getElementById('gallery-videos');
+            const btnFotos = document.getElementById('btn-fotos');
+            const btnVideos = document.getElementById('btn-videos');
+            
+            if (type === 'fotos') {
+                fotosGrid.classList.remove('hidden');
+                videosGrid.classList.add('hidden');
+                btnFotos.className = 'px-8 py-3 bg-gradient-to-r from-red-900 to-red-700 text-white rounded font-display uppercase tracking-wider';
+                btnVideos.className = 'px-8 py-3 bg-gray-800 text-gray-300 rounded font-display uppercase tracking-wider hover:bg-gray-700 transition';
+            } else {
+                fotosGrid.classList.add('hidden');
+                videosGrid.classList.remove('hidden');
+                btnVideos.className = 'px-8 py-3 bg-gradient-to-r from-red-900 to-red-700 text-white rounded font-display uppercase tracking-wider';
+                btnFotos.className = 'px-8 py-3 bg-gray-800 text-gray-300 rounded font-display uppercase tracking-wider hover:bg-gray-700 transition';
+            }
+        }
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
