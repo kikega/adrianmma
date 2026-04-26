@@ -3,6 +3,10 @@ from django.utils import timezone
 
 
 class FighterProfile(models.Model):
+    """
+    Modelo que representa el perfil del luchador.
+    Almacena información personal, biografía, y estadísticas de contacto.
+    """
     name = models.CharField(max_length=200, default="Adrián Gálvez")
     nickname = models.CharField(max_length=100, default="The Butcher")
     bio = models.TextField(blank=True)
@@ -20,11 +24,14 @@ class FighterProfile(models.Model):
         verbose_name = "Perfil del Luchador"
         verbose_name_plural = "Perfiles"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.name} '{self.nickname}'"
 
 
 class Service(models.Model):
+    """
+    Modelo que representa un servicio o clase impartida por el luchador.
+    """
     SERVICE_TYPES = [
         ('defensa_personal', 'Defensa Personal'),
         ('jiujitsu', 'Jiu-Jitsu'),
@@ -43,11 +50,14 @@ class Service(models.Model):
         verbose_name_plural = "Servicios"
         ordering = ['order']
 
-    def __str__(self):
-        return self.get_name_display()
+    def __str__(self) -> str:
+        return str(self.get_name_display())
 
 
 class Multimedia(models.Model):
+    """
+    Modelo para la gestión de galería multimedia (fotos y vídeos).
+    """
     MEDIA_TYPES = [
         ('foto', 'Foto'),
         ('video', 'Video'),
@@ -67,11 +77,14 @@ class Multimedia(models.Model):
         verbose_name_plural = "Galería Multimedia"
         ordering = ['-created_at']
 
-    def __str__(self):
-        return self.title
+    def __str__(self) -> str:
+        return str(self.title)
 
 
 class SocialNetwork(models.Model):
+    """
+    Modelo para gestionar los enlaces a las redes sociales del luchador.
+    """
     PLATFORMS = [
         ('instagram', 'Instagram'),
         ('facebook', 'Facebook'),
@@ -92,11 +105,14 @@ class SocialNetwork(models.Model):
         verbose_name_plural = "Redes Sociales"
         ordering = ['order']
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.get_platform_display()}: @{self.username}"
 
 
 class ContactMessage(models.Model):
+    """
+    Modelo para almacenar los mensajes recibidos desde el formulario de contacto de la web.
+    """
     name = models.CharField(max_length=200)
     email = models.EmailField()
     phone = models.CharField(max_length=20, blank=True)
@@ -110,5 +126,5 @@ class ContactMessage(models.Model):
         verbose_name_plural = "Mensajes de Contacto"
         ordering = ['-created_at']
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.name} - {self.created_at.strftime('%d/%m/%Y')}"
