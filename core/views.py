@@ -13,7 +13,7 @@ def landing(request: HttpRequest) -> HttpResponse:
     context = {
         'fighter': services.get_active_fighter(),
         'services': services.get_active_services(),
-        'photos': list(services.get_gallery_items('foto', limit=12)),
+        'photos': list(services.get_gallery_items('foto', limit=6)),
         'videos': services.get_gallery_items('video', limit=6),
         'social_networks': services.get_active_social_networks(),
     }
@@ -25,9 +25,17 @@ def gallery(request: HttpRequest) -> HttpResponse:
     Vista para cargar dinámicamente elementos de la galería mediante HTMX.
     """
     media_type = request.GET.get('type', 'foto')
-    items = services.get_gallery_items(media_type=media_type)
+    limit = 6 if media_type == 'foto' else 6
+    items = services.get_gallery_items(media_type=media_type, limit=limit)
     
-    return render(request, 'core/partials/gallery_items.html', {'items': items})
+    context = {
+        'items': items,
+        'media_type': media_type,
+    }
+    if media_type == 'video':
+        context['photos'] = services.get_gallery_items('foto', limit=6)
+        
+    return render(request, 'core/partials/gallery_items.html', context)
 
 
 @require_POST

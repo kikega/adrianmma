@@ -199,3 +199,25 @@ nav.scrolled { background: rgba(13, 13, 13, 0.98); }
 }
 
 .animate-pulse { animation: pulse 2s infinite; }
+
+/* GLightbox Custom Styling (The Butcher Theme) */
+.gslide-description {
+    background: rgba(13, 13, 13, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-top: 2px solid rgba(196, 30, 58, 0.5) !important;
+}
+.gslide-title {
+    font-family: 'Oswald', sans-serif !important;
+    color: #c41e3a !important;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 6px !important;
+}
+.gslide-desc {
+    color: #d1d5db !important;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+}

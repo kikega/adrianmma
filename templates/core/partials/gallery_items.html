@@ -1,22 +1,57 @@
 {% load static %}
 {% if items %}
-<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+<div class="grid {% if media_type == 'video' %}grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6{% else %}grid-cols-2 md:grid-cols-4 gap-4{% endif %}">
     {% for item in items %}
-    <div class="gallery-item relative overflow-hidden rounded-lg aspect-square cursor-pointer">
         {% if item.media_type == 'foto' %}
-        <img src="{{ item.image.url }}" alt="{{ item.title }}" class="w-full h-full object-cover">
+            {% if forloop.counter <= 4 %}
+            <a href="{{ item.image.url }}" class="glightbox gallery-item relative block overflow-hidden rounded-lg aspect-square cursor-pointer transition animate-fade-in" data-gallery="gallery-fotos" data-title="{{ item.title }}" data-description="{{ item.description }}">
+                <img src="{{ item.image.url }}" alt="{{ item.title }}" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition duration-300 flex items-center justify-center z-20">
+                    <p class="text-white font-display text-lg tracking-wider uppercase text-center px-4">{{ item.title }}</p>
+                </div>
+            </a>
+            {% endif %}
         {% else %}
-        <iframe src="{{ item.video_url }}" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
+        <a href="{{ item.video_url }}" class="glightbox-video gallery-item relative block overflow-hidden rounded-lg aspect-video cursor-pointer transition animate-fade-in" data-gallery="gallery-videos-combined" data-title="{{ item.title }}" data-description="{{ item.description }}">
+            {% if item.image %}
+            <img src="{{ item.image.url }}" alt="{{ item.title }}" class="w-full h-full object-cover">
+            {% else %}
+            <div class="w-full h-full bg-gray-900 flex items-center justify-center">
+                <i class="fas fa-video text-gray-600 text-4xl"></i>
+            </div>
+            {% endif %}
+            <!-- Play overlay -->
+            <div class="absolute inset-0 flex items-center justify-center z-20">
+                <div class="w-16 h-16 bg-red-600/90 hover:bg-red-600 hover:scale-110 rounded-full flex items-center justify-center text-white shadow-lg transform transition duration-300">
+                    <i class="fas fa-play text-xl ml-1"></i>
+                </div>
+            </div>
+            <div class="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition duration-300 flex items-center justify-center z-30">
+                <p class="text-white font-display text-lg tracking-wider uppercase text-center px-4">{{ item.title }}</p>
+            </div>
+        </a>
         {% endif %}
-        <div class="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition flex items-center justify-center">
-            <p class="text-white font-display">{{ item.title }}</p>
-        </div>
-    </div>
     {% endfor %}
+
+    {% if media_type == 'foto' %}
+        <!-- Hidden photos to be loaded in the lightbox carousel -->
+        {% for item in items %}
+            {% if forloop.counter > 4 %}
+            <a href="{{ item.image.url }}" class="glightbox hidden" data-gallery="gallery-fotos" data-title="{{ item.title }}" data-description="{{ item.description }}"></a>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    {% if media_type == 'video' and photos %}
+        <!-- Hidden photo links to include in the combined videos carousel -->
+        {% for item in photos %}
+        <a href="{{ item.image.url }}" class="glightbox-video hidden" data-gallery="gallery-videos-combined" data-title="{{ item.title }}" data-description="{{ item.description }}"></a>
+        {% endfor %}
+    {% endif %}
 </div>
 {% else %}
 <div class="col-span-full text-center py-20">
-    <i class="fas fa-camera text-6xl text-gray-700 mb-4"></i>
+    <i class="fas {% if media_type == 'video' %}fa-video{% else %}fa-camera{% endif %} text-6xl text-gray-700 mb-4"></i>
     <p class="text-gray-500">No hay contenido disponible</p>
 </div>
 {% endif %}
