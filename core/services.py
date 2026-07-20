@@ -1,9 +1,11 @@
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, Optional
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.db.models import QuerySet
 
 from .models import FighterProfile, Service, Multimedia, SocialNetwork, ContactMessage
+
+ALLOWED_MEDIA_TYPES = {'foto', 'video'}
 
 def get_active_fighter() -> Optional[FighterProfile]:
     """
@@ -18,16 +20,9 @@ def get_active_services() -> QuerySet[Service]:
     return Service.objects.filter(is_active=True).order_by('order')
 
 def get_gallery_items(media_type: str, limit: Optional[int] = None) -> QuerySet[Multimedia]:
-    """
-    Obtiene los elementos multimedia según su tipo.
-    
-    Args:
-        media_type (str): Tipo de multimedia ('foto' o 'video').
-        limit (int, optional): Límite de resultados a retornar.
-        
-    Returns:
-        QuerySet[Multimedia]: Lista de elementos multimedia filtrados.
-    """
+    if media_type not in ALLOWED_MEDIA_TYPES:
+        return Multimedia.objects.none()
+
     items = Multimedia.objects.filter(media_type=media_type)
     if limit:
         return items[:limit]

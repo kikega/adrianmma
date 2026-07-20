@@ -71,5 +71,6 @@ class ContactMessageAdmin(admin.ModelAdmin):
     actions = ['mark_as_read']
     
     def mark_as_read(self, request, queryset):
-        queryset.update(is_read=True)
+        updated = queryset.update(is_read=True)
+        self.message_user(request, f"{updated} mensaje(s) marcado(s) como leído(s).")
     mark_as_read.short_description = "Marcar como leídos"
