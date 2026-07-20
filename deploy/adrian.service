@@ -9,7 +9,7 @@ User=kike
 Group=kike
 WorkingDirectory=/home/kike/proyectos/adrianmma
 
-Environment="GUNICORN_BIND=unix:/run/adrian/adrian.sock"
+Environment="GUNICORN_BIND=unix:/run/adrian.sock"
 
 EnvironmentFile=/home/kike/proyectos/adrianmma/.env
 Environment=DJANGO_SETTINGS_MODULE=adrian.settings
