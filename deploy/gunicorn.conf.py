@@ -1,26 +1,33 @@
 import os
 import multiprocessing
+from pathlib import Path
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent
 
-bind = "unix:/run/adrian/adrian.sock"
-workers = multiprocessing.cpu_count() * 2 + 1
+bind = os.getenv(
+    "GUNICORN_BIND",
+    "unix:/run/adrian/adrian.sock",
+)
+
+workers = int(
+    os.getenv(
+        "GUNICORN_WORKERS",
+        multiprocessing.cpu_count(),
+    )
+)
+
 worker_class = "sync"
+
 timeout = 120
 graceful_timeout = 30
 keepalive = 5
 
-user = "adrian"
-group = "adrian"
+accesslog = str(BASE_DIR / "logs" / "gunicorn_access.log")
+errorlog = str(BASE_DIR / "logs" / "gunicorn_error.log")
 
-errorlog = os.path.join(BASE_DIR, "logs", "gunicorn_error.log")
-accesslog = os.path.join(BASE_DIR, "logs", "gunicorn_access.log")
-loglevel = "info"
+loglevel = os.getenv(
+    "GUNICORN_LOG_LEVEL",
+    "info",
+)
 
 capture_output = True
-daemon = False
-
-raw_env = [
-    "DJANGO_SETTINGS_MODULE=adrian.settings",
-    "PYTHONPATH=" + BASE_DIR,
-]

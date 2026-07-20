@@ -5,16 +5,20 @@ Wants=postgresql.service
 
 [Service]
 Type=notify
-User=adrian
-Group=adrian
+User=kike
+Group=kike
 RuntimeDirectory=adrian
-WorkingDirectory=/home/adrian/adrian
+WorkingDirectory=/home/kike/proyectos/adrianmma
 
-EnvironmentFile=/home/adrian/adrian/.env
-Environment=DJANGO_SETTINGS_MODULE=adrian.settings
-Environment=PYTHONUNBUFFERED=1
+Environment="GUNICORN_WORKERS=4"
+Environment="GUNICORN_BIND=unix:/run/kike/adrian.sock"
 
-ExecStart=/home/adrian/adrian/.venv/bin/gunicorn adrian.wsgi:application -c deploy/gunicorn.conf.py
+EnvironmentFile=/home/kike/proyectos/adrianmma/.env
+Environment=DJANGO_SETTINGS_MODULE=adrianmma.settings
+
+ExecStart=/home/kike/proyectos/adrianmma/.venv/bin/gunicorn \
+    --config /home/kike/proyectos/adrianmma/deploy/gunicorn.conf.py \
+    adrian.wsgi:application
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
 
@@ -27,3 +31,8 @@ NoNewPrivileges=true
 
 [Install]
 WantedBy=multi-user.target
+
+
+
+
+
