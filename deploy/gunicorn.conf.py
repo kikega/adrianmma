@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent
 
 bind = os.getenv(
     "GUNICORN_BIND",
-    "unix:/run/kike/adrian.sock",
+    "unix:/run/adrian/adrian.sock",
 )
 
 workers = int(
