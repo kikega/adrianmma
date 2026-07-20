@@ -9,12 +9,14 @@ bind = os.getenv(
     "unix:/run/adrian/adrian.sock",
 )
 
-workers = int(
+#workers = int(
     os.getenv(
         "GUNICORN_WORKERS",
         multiprocessing.cpu_count(),
     )
 )
+
+workers = os.getenv('GUNICORN_WORKERS', '3')
 
 worker_class = "sync"
 
