@@ -7,13 +7,10 @@ Wants=postgresql.service
 Type=notify
 User=kike
 Group=kike
-RuntimeDirectory=adrian
 WorkingDirectory=/home/kike/proyectos/adrianmma
 
 Environment="GUNICORN_WORKERS=4"
 Environment="GUNICORN_BIND=unix:/run/kike/adrian.sock"
-
-Environment="APP_NAME=adrian"
 
 EnvironmentFile=/home/kike/proyectos/adrianmma/.env
 Environment=DJANGO_SETTINGS_MODULE=adrian.settings
@@ -21,8 +18,6 @@ Environment=DJANGO_SETTINGS_MODULE=adrian.settings
 ExecStart=/home/kike/proyectos/adrianmma/.venv/bin/gunicorn \
     --config /home/kike/proyectos/adrianmma/deploy/gunicorn.conf.py \
     adrian.wsgi:application
-ExecReload=/bin/kill -s HUP $MAINPID
-ExecStop=/bin/kill -s TERM $MAINPID
 
 Restart=on-failure
 RestartSec=5
