@@ -7,4 +7,5 @@ urlpatterns = [
     path('', views.landing, name='landing'),
     path('galeria/', views.gallery, name='gallery'),
     path('contacto/', views.contact, name='contact'),
+    path('contacto/formulario/', views.contact_form_view, name='contact_form'),
 ]

@@ -14,6 +14,9 @@ Environment="GUNICORN_BIND=unix:/run/adrian/adrian.sock"
 EnvironmentFile=/home/kike/proyectos/adrianmma/.env
 Environment=DJANGO_SETTINGS_MODULE=adrian.settings
 
+RuntimeDirectory=adrian
+RuntimeDirectoryMode=0755
+
 ExecStart=/home/kike/proyectos/adrianmma/.venv/bin/gunicorn \
     --config /home/kike/proyectos/adrianmma/deploy/gunicorn.conf.py \
     adrian.wsgi:application
@@ -27,8 +30,3 @@ NoNewPrivileges=true
 
 [Install]
 WantedBy=multi-user.target
-
-
-
-
-

@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.core.validators import FileExtensionValidator
 
 
 class FighterProfile(models.Model):
@@ -67,7 +68,11 @@ class Multimedia(models.Model):
     media_type = models.CharField(max_length=20, choices=MEDIA_TYPES)
     image = models.ImageField(upload_to='multimedia/photos/', blank=True)
     video_url = models.URLField(blank=True, help_text="URL de YouTube/Vimeo")
-    video_file = models.FileField(upload_to='multimedia/videos/', blank=True)
+    video_file = models.FileField(
+        upload_to='multimedia/videos/',
+        blank=True,
+        validators=[FileExtensionValidator(allowed_extensions=['mp4', 'webm', 'mov', 'avi', 'mkv'])]
+    )
     description = models.TextField(blank=True)
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
