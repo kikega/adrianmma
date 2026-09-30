@@ -6,16 +6,15 @@ Wants=postgresql.service
 [Service]
 Type=notify
 User=kike
-Group=kike
+Group=www-data
 WorkingDirectory=/home/kike/proyectos/adrianmma
 
 Environment="GUNICORN_BIND=unix:/run/adrian/adrian.sock"
-
 EnvironmentFile=/home/kike/proyectos/adrianmma/.env
 Environment=DJANGO_SETTINGS_MODULE=adrian.settings
 
 RuntimeDirectory=adrian
-RuntimeDirectoryMode=0755
+RuntimeDirectoryMode=0775
 
 ExecStart=/home/kike/proyectos/adrianmma/.venv/bin/gunicorn \
     --config /home/kike/proyectos/adrianmma/deploy/gunicorn.conf.py \
@@ -23,6 +22,9 @@ ExecStart=/home/kike/proyectos/adrianmma/.venv/bin/gunicorn \
 
 Restart=on-failure
 RestartSec=5
+
+StandardOutput=journal
+StandardError=journal
 
 PrivateTmp=true
 ProtectSystem=full

@@ -15,8 +15,8 @@ SECRET_KEY = env('SECRET_KEY')
 
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
-CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=['https://adrigalvez.com', 'https://www.adrigalvez.com', 'http://localhost:8000', 'http://127.0.0.1:8000'])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1', 'adrian.srvdebian', 'www.adrian.srvdebian', 'adrian.egalvez.es'])
+CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=['http://localhost:8000', 'http://127.0.0.1:8000', 'http://adrian.srvdebian', 'http://www.adrian.srvdebian', 'https://adrian.egalvez.es', 'https://adrigalvez.com'])
 
 # Proxy & SSL (detrás de Nginx)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -57,6 +57,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_htmx.middleware.HtmxMiddleware",
+    "core.middleware.RequestLoggingMiddleware",
     "core.middleware.GlobalExceptionLoggingMiddleware",
 ]
 
@@ -141,7 +142,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# Logging configuration
+# Logging configuration (Django & Apps)
 LOG_DIR = BASE_DIR / 'logs'
 LOG_DIR.mkdir(exist_ok=True)
 
@@ -150,8 +151,14 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'format': '[{asctime}] [{levelname}] [{name}] (pid:{process:d} thread:{thread:d}): {message}',
             'style': '{',
+            'datefmt': '%Y-%m-%d %H:%M:%S',
+        },
+        'simple': {
+            'format': '[{asctime}] [{levelname}] {message}',
+            'style': '{',
+            'datefmt': '%Y-%m-%d %H:%M:%S',
         },
     },
     'handlers': {
@@ -159,10 +166,11 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
-        'file': {
+        'file_django': {
             'class': 'logging.handlers.WatchedFileHandler',
             'filename': LOG_DIR / 'django.log',
             'formatter': 'verbose',
+            'level': 'DEBUG' if DEBUG else 'INFO',
         },
         'file_error': {
             'class': 'logging.handlers.WatchedFileHandler',
@@ -170,17 +178,43 @@ LOGGING = {
             'formatter': 'verbose',
             'level': 'ERROR',
         },
+        'file_requests': {
+            'class': 'logging.handlers.WatchedFileHandler',
+            'filename': LOG_DIR / 'requests.log',
+            'formatter': 'simple',
+            'level': 'INFO',
+        },
     },
     'loggers': {
+        # Logger raíz para capturar cualquier evento no explícito
+        '': {
+            'handlers': ['console', 'file_django', 'file_error'],
+            'level': 'DEBUG' if DEBUG else 'INFO',
+        },
         'django': {
-            'handlers': ['console', 'file', 'file_error'],
+            'handlers': ['console', 'file_django', 'file_error'],
             'level': 'INFO',
-            'propagate': True,
+            'propagate': False,
+        },
+        'django.request': {
+            'handlers': ['console', 'file_django', 'file_error', 'file_requests'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'django.security': {
+            'handlers': ['console', 'file_django', 'file_error'],
+            'level': 'INFO',
+            'propagate': False,
         },
         'core': {
-            'handlers': ['console', 'file_error'],
-            'level': 'ERROR',
-            'propagate': True,
+            'handlers': ['console', 'file_django', 'file_error'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'core.requests': {
+            'handlers': ['console', 'file_requests'],
+            'level': 'INFO',
+            'propagate': False,
         },
     },
 }
