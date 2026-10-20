@@ -10,7 +10,6 @@ class FighterProfile(models.Model):
     """
     name = models.CharField(max_length=200, default="Adrián Gálvez")
     nickname = models.CharField(max_length=100, default="The Butcher")
-    bio = models.TextField(blank=True)
     specialties = models.CharField(max_length=500, blank=True)
     achievements = models.TextField(blank=True)
     phone = models.CharField(max_length=20, blank=True)

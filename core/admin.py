@@ -10,7 +10,7 @@ class FighterProfileAdmin(admin.ModelAdmin):
     search_fields = ['name', 'nickname']
     fieldsets = (
         ('Información Personal', {
-            'fields': ('name', 'nickname', 'bio', 'profile_image')
+            'fields': ('name', 'nickname', 'profile_image')
         }),
         ('specialties', {
             'fields': ('specialties', 'achievements')

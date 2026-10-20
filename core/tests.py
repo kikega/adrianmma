@@ -19,7 +19,6 @@ class CoreViewsAndFormsTestCase(TestCase):
         self.fighter = FighterProfile.objects.create(
             name="Adrián Gálvez",
             nickname="The Butcher",
-            bio="Luchador profesional de MMA.",
             achievements="Campeón de España Amateur IMAF 2021",
             phone="+34 600 111 222",
             email="contacto@adrigalvez.com",
