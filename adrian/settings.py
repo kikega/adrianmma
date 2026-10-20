@@ -15,8 +15,46 @@ SECRET_KEY = env('SECRET_KEY')
 
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1', 'adrian.srvdebian', 'www.adrian.srvdebian', 'adrian.egalvez.es'])
-CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=['http://localhost:8000', 'http://127.0.0.1:8000', 'http://adrian.srvdebian', 'http://www.adrian.srvdebian', 'https://adrian.egalvez.es', 'https://adrigalvez.com'])
+ALLOWED_HOSTS = env.list(
+    'ALLOWED_HOSTS',
+    default=[
+        'localhost',
+        '127.0.0.1',
+        'admin.localhost',
+        'adrian.srvdebian',
+        'www.adrian.srvdebian',
+        'adrianadmin.srvdebian',
+        'adrian.egalvez.es',
+        'adrianadmin.egalvez.es',
+    ],
+)
+ADMIN_HOSTS = env.list(
+    'ADMIN_HOSTS',
+    default=[
+        'admin.localhost',
+        'adrianadmin.srvdebian',
+        'adrianadmin.egalvez.es',
+    ],
+)
+# Garantizar que cualquier host definido en ADMIN_HOSTS esté permitido en ALLOWED_HOSTS
+for _admin_host in ADMIN_HOSTS:
+    if _admin_host not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append(_admin_host)
+
+CSRF_TRUSTED_ORIGINS = env.list(
+    'CSRF_TRUSTED_ORIGINS',
+    default=[
+        'http://localhost:8000',
+        'http://127.0.0.1:8000',
+        'http://admin.localhost:8000',
+        'http://adrian.srvdebian',
+        'http://www.adrian.srvdebian',
+        'http://adrianadmin.srvdebian',
+        'https://adrian.egalvez.es',
+        'https://adrianadmin.egalvez.es',
+        'https://adrigalvez.com',
+    ],
+)
 
 # Proxy & SSL (detrás de Nginx)
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -46,11 +84,17 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_htmx",
     "core",
+    "users",
+]
+
+AUTHENTICATION_BACKENDS = [
+    "users.backends.EmailBackend",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "core.middleware.AdminSubdomainMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",

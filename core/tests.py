@@ -160,3 +160,45 @@ class CoreViewsAndFormsTestCase(TestCase):
 
         invalid = services.get_gallery_items('invalido')
         self.assertEqual(invalid.count(), 0)
+
+
+@override_settings(
+    ALLOWED_HOSTS=['adrian.egalvez.es', 'adrianadmin.egalvez.es', 'testserver'],
+    ADMIN_HOSTS=['adrianadmin.egalvez.es'],
+)
+class AdminSubdomainTestCase(TestCase):
+    def setUp(self):
+        from django.core.cache import cache
+        cache.clear()
+        self.client = Client()
+
+    def test_admin_not_accessible_on_public_domain(self):
+        """En el dominio público, /admin/ debe devolver 404 Not Found."""
+        response = self.client.get('/admin/', HTTP_HOST='adrian.egalvez.es')
+        self.assertEqual(response.status_code, 404)
+
+    def test_admin_accessible_on_admin_subdomain(self):
+        """En el subdominio de administración, la raíz / redirige al login del admin."""
+        response = self.client.get('/', HTTP_HOST='adrianadmin.egalvez.es')
+        self.assertEqual(response.status_code, 302)
+        self.assertIn('/login/', response['Location'])
+        self.assertEqual(response.headers.get('X-Robots-Tag'), 'noindex, nofollow')
+
+    def test_admin_login_brute_force_protection(self):
+        """Tras 5 intentos fallidos de login en el subdominio admin, bloquea con 403."""
+        for _ in range(5):
+            resp = self.client.post(
+                '/login/',
+                data={'username': 'admin', 'password': 'wrongpassword'},
+                HTTP_HOST='adrianadmin.egalvez.es',
+            )
+            self.assertEqual(resp.status_code, 200)
+
+        # El 6º intento debe ser rechazado con 403 Forbidden
+        blocked_resp = self.client.post(
+            '/login/',
+            data={'username': 'admin', 'password': 'wrongpassword'},
+            HTTP_HOST='adrianadmin.egalvez.es',
+        )
+        self.assertEqual(blocked_resp.status_code, 403)
+
