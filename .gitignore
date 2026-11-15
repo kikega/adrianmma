@@ -48,4 +48,4 @@ django_errors.log
 .cursor/
 
 # Despliegue
-#deploy/
+deploy/
