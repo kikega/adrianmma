@@ -1,9 +1,10 @@
 import time
+import secrets
 import logging
 import traceback
 from django.conf import settings
 from django.core.cache import cache
-from django.http import JsonResponse, HttpResponseServerError, HttpResponseForbidden
+from django.http import Http404, JsonResponse, HttpResponseServerError, HttpResponseForbidden
 from django.utils.deprecation import MiddlewareMixin
 
 logger = logging.getLogger('core')
@@ -12,11 +13,64 @@ security_logger = logging.getLogger('django.security')
 
 
 def get_client_ip(request):
-    """Obtiene la IP real del cliente considerando el proxy inverso (Nginx)."""
+    """
+    Obtiene la IP del cliente detrás de Nginx priorizando X-Real-IP
+    (establecida directamente por el proxy) o el último salto de X-Forwarded-For,
+    evitando falsificación mediante cabeceras X-Forwarded-For enviadas por el cliente.
+    """
+    x_real_ip = request.META.get('HTTP_X_REAL_IP')
+    if x_real_ip:
+        return x_real_ip.strip()
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
-        return x_forwarded_for.split(',')[0].strip()
+        return x_forwarded_for.split(',')[-1].strip()
     return request.META.get('REMOTE_ADDR', '-')
+
+
+class SecurityHeadersMiddleware(MiddlewareMixin):
+    """
+    Genera un nonce criptográfico por petición y añade cabeceras de seguridad
+    modernas (CSP, Referrer-Policy, Permissions-Policy, COOP, nosniff).
+    """
+
+    def process_request(self, request):
+        request.csp_nonce = secrets.token_urlsafe(16)
+
+    def process_response(self, request, response):
+        response.headers.setdefault('X-Content-Type-Options', 'nosniff')
+        response.headers.setdefault('Referrer-Policy', 'strict-origin-when-cross-origin')
+        response.headers.setdefault(
+            'Permissions-Policy',
+            'camera=(), geolocation=(), microphone=(), focus-without-user-activation=()',
+        )
+        response.headers.setdefault('Cross-Origin-Opener-Policy', 'same-origin-allow-popups')
+
+        content_type = response.headers.get('Content-Type', '')
+        if 'text/html' in content_type and 'Content-Security-Policy' not in response.headers:
+            if getattr(request, 'urlconf', None) == 'adrian.urls_admin':
+                # Política base compatible con los scripts inline propios de Django Admin
+                response.headers['Content-Security-Policy'] = (
+                    "object-src 'none'; base-uri 'self'; frame-ancestors 'self'"
+                )
+            else:
+                nonce = getattr(request, 'csp_nonce', '')
+                csp_directives = [
+                    "default-src 'self'",
+                    f"script-src 'nonce-{nonce}' 'strict-dynamic' 'report-sample'",
+                    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com",
+                    "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
+                    "img-src 'self' data: https:",
+                    "media-src 'self'",
+                    "frame-src https://maps.google.com https://www.google.com https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com",
+                    "connect-src 'self'",
+                    "object-src 'none'",
+                    "base-uri 'none'",
+                    "form-action 'self'",
+                    "frame-ancestors 'self'",
+                ]
+                response.headers['Content-Security-Policy'] = '; '.join(csp_directives)
+
+        return response
 
 
 class AdminSubdomainMiddleware(MiddlewareMixin):
@@ -82,12 +136,7 @@ class RequestLoggingMiddleware(MiddlewareMixin):
         if hasattr(request, '_start_time'):
             duration = (time.time() - request._start_time) * 1000  # ms
 
-        # Obtener IP real considerando Nginx proxy
-        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-        if x_forwarded_for:
-            ip = x_forwarded_for.split(',')[0].strip()
-        else:
-            ip = request.META.get('REMOTE_ADDR', '-')
+        ip = get_client_ip(request)
 
         status_code = getattr(response, 'status_code', '-')
         msg = f"{request.method} {request.get_full_path()} - {status_code} ({duration:.2f}ms) IP: {ip}"
@@ -106,6 +155,9 @@ class GlobalExceptionLoggingMiddleware(MiddlewareMixin):
     registrar el error detallado en los logs con traceback y retornar una respuesta segura.
     """
     def process_exception(self, request, exception):
+        if isinstance(exception, Http404):
+            return None
+
         logger.error(
             f"Error no controlado en la petición: {request.method} {request.path}\n"
             f"Excepción: {str(exception)}\n"
