@@ -5,8 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adrián Gálvez "The Butcher" | Clases de MMA, Jiu-Jitsu y Boxeo en Alicante</title>
-    <meta name="description" content="¿Buscas clases de MMA, Jiu-Jitsu o Boxeo en Alicante? Entrena con Adrián Gálvez 'The Butcher', luchador profesional de MMA en Climent Club. Clases particulares y de alto rendimiento.">
+    <title>Adrián Gálvez "The Butcher" | {% if private_classes_enabled %}Clases de MMA, Jiu-Jitsu y Boxeo en Alicante{% else %}Luchador Profesional de MMA en Alicante{% endif %}</title>
+    <meta name="description" content="{% if private_classes_enabled %}¿Buscas clases de MMA, Jiu-Jitsu o Boxeo en Alicante? Entrena con Adrián Gálvez 'The Butcher', luchador profesional de MMA en Climent Club. Clases particulares y de alto rendimiento.{% else %}Adrián Gálvez 'The Butcher', luchador profesional de MMA, cinturón negro de Jiu-Jitsu Brasileño y competidor en Climent Club Alicante.{% endif %}">
     <meta name="keywords" content="Adrián Gálvez, The Butcher, Climent Club Alicante, MMA Alicante, clases de MMA Alicante, entrenador de Jiu-Jitsu, clases de boxeo Alicante, defensa personal Alicante, entrenamiento MMA profesional, UFC, BJJ Alicante, luchador profesional, artes marciales Alicante, Climent hermanos, boxeo profesional">
     <meta name="author" content="Adrián Gálvez - The Butcher">
     <meta name="robots" content="index, follow">
@@ -27,7 +27,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Adrián Gálvez 'The Butcher' | MMA y Boxeo Alicante">
-    <meta name="twitter:description" content="Clases particulares y entrenamiento de MMA y BJJ en Climent Club Alicante con el luchador profesional Adrián Gálvez.">
+    <meta name="twitter:description" content="{% if private_classes_enabled %}Clases particulares y entrenamiento de MMA y BJJ en Climent Club Alicante con el luchador profesional Adrián Gálvez.{% else %}Luchador profesional de MMA y BJJ en Climent Club Alicante: Adrián Gálvez 'The Butcher'.{% endif %}">
     <meta name="twitter:site" content="@adrigalvez17">
     <meta name="twitter:creator" content="@adrigalvez17">
     <meta name="twitter:image" content="https://adrigalvez.com/static/images/adri-sangriento.webp">
@@ -67,7 +67,7 @@
             "@type": "SportsActivityLocation",
             "@id": "https://adrigalvez.com/#business",
             "name": "Entrenamiento de MMA y Boxeo Adrián Gálvez - Climent Club",
-            "description": "Entrenamiento profesional y clases particulares de MMA, Jiu-Jitsu Brasileño (BJJ), Boxeo y Defensa Personal en Alicante dirigidas por el luchador Adrián Gálvez 'The Butcher' en el prestigioso gimnasio Climent Club.",
+            "description": "{% if private_classes_enabled %}Entrenamiento profesional y clases particulares de MMA, Jiu-Jitsu Brasileño (BJJ), Boxeo y Defensa Personal en Alicante dirigidas por el luchador Adrián Gálvez 'The Butcher' en el prestigioso gimnasio Climent Club.{% else %}Entrenamiento profesional de MMA, Jiu-Jitsu Brasileño (BJJ), Boxeo y Defensa Personal en Alicante con el luchador Adrián Gálvez 'The Butcher' en el prestigioso gimnasio Climent Club.{% endif %}",
             "url": "https://adrigalvez.com",
             "image": "https://adrigalvez.com/static/images/equipo-climent.webp",
             "priceRange": "$$",
@@ -139,7 +139,9 @@
                         <li><a href="#inicio" class="nav-link text-gray-300 hover:text-white transition text-sm uppercase tracking-wider py-2">Inicio</a></li>
                         <li><a href="#club" class="nav-link text-gray-300 hover:text-white transition text-sm uppercase tracking-wider py-2">El Club</a></li>
                         <li><a href="#sobre-mi" class="nav-link text-gray-300 hover:text-white transition text-sm uppercase tracking-wider py-2">Sobre Mí</a></li>
+                        {% if private_classes_enabled %}
                         <li><a href="#servicios" class="nav-link text-gray-300 hover:text-white transition text-sm uppercase tracking-wider py-2">Servicios</a></li>
+                        {% endif %}
                         <li><a href="#galeria" class="nav-link text-gray-300 hover:text-white transition text-sm uppercase tracking-wider py-2">Galería</a></li>
                         <li>
                             <a href="#contacto" class="btn-primary px-6 py-2.5 rounded text-white font-display text-sm uppercase tracking-wider inline-block">
@@ -165,7 +167,9 @@
                     <li><a href="#inicio" class="nav-link block py-3 px-2 rounded text-gray-200 hover:text-white hover:bg-white/5 transition">Inicio</a></li>
                     <li><a href="#club" class="nav-link block py-3 px-2 rounded text-gray-200 hover:text-white hover:bg-white/5 transition">El Club</a></li>
                     <li><a href="#sobre-mi" class="nav-link block py-3 px-2 rounded text-gray-200 hover:text-white hover:bg-white/5 transition">Sobre Mí</a></li>
+                    {% if private_classes_enabled %}
                     <li><a href="#servicios" class="nav-link block py-3 px-2 rounded text-gray-200 hover:text-white hover:bg-white/5 transition">Servicios</a></li>
+                    {% endif %}
                     <li><a href="#galeria" class="nav-link block py-3 px-2 rounded text-gray-200 hover:text-white hover:bg-white/5 transition">Galería</a></li>
                     <li><a href="#contacto" class="block py-3 px-2 rounded text-red-400 hover:text-white hover:bg-red-900/20 font-medium transition">Contactar</a></li>
                 </ul>
@@ -202,18 +206,25 @@
                 <div class="w-24 h-1 bg-gradient-to-r from-red-900 via-red-600 to-red-900 mx-auto mb-6" aria-hidden="true"></div>
 
                 <p class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-8 leading-relaxed">
+                    {% if private_classes_enabled %}
                     Entrenamiento de alto nivel con un luchador activo de <span class="text-white font-medium">MMA
                         profesional</span>. Clases particulares de <span class="text-white font-medium">Jiu-Jitsu
                         Brasileño</span>, <span class="text-white font-medium">Boxeo</span> y <span class="text-white font-medium">Defensa Personal</span> en el prestigioso <span class="text-white font-medium">Climent Club Alicante</span>.
+                    {% else %}
+                    Luchador activo de <span class="text-white font-medium">MMA profesional</span>. Especialista en <span class="text-white font-medium">Jiu-Jitsu
+                        Brasileño</span>, <span class="text-white font-medium">Boxeo</span> y <span class="text-white font-medium">Defensa Personal</span> en el prestigioso <span class="text-white font-medium">Climent Club Alicante</span>.
+                    {% endif %}
                 </p>
 
                 <div class="flex flex-col sm:flex-row gap-5 justify-center">
                     <a href="#contacto" class="btn-primary px-10 py-4 rounded text-white font-display text-lg uppercase tracking-wider inline-block">
-                        Reservar Clase
+                        {% if private_classes_enabled %}Reservar Clase{% else %}Contactar{% endif %}
                     </a>
+                    {% if private_classes_enabled %}
                     <a href="#servicios" class="border-2 border-gray-500 px-10 py-4 rounded text-gray-200 font-display text-lg uppercase tracking-wider hover:border-white hover:text-white transition inline-block">
                         Ver Servicios
                     </a>
+                    {% endif %}
                 </div>
 
                 <!-- Social Links Dinámicos -->
@@ -395,6 +406,7 @@
             </div>
         </section>
 
+        {% if private_classes_enabled %}
         <!-- Services Section -->
         <section id="servicios" class="parallax service-parallax py-24 sm:py-32">
             <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -431,7 +443,7 @@
                         <div class="mt-4 pt-3 border-t border-red-900/30 space-y-3">
                             {% if service.price_per_hour %}
                             <div>
-                                <span class="gold-text font-display text-2xl font-bold">{{ service.price_per_hour|floatformat:0 }}€</span>
+                                <span class="gold-text font-display text-2xl font-bold">{{ service.price_per_hour|floatformat:"-2" }}€</span>
                                 <span class="text-gray-300 text-xs uppercase tracking-wider"> / hora</span>
                             </div>
                             {% endif %}
@@ -510,6 +522,7 @@
                 </div>
             </div>
         </section>
+        {% endif %}
 
         <!-- Momentos Section -->
         <section class="py-24 bg-butcher-dark">
@@ -655,8 +668,12 @@
                             EMPIEZA TU <span class="gold-text">TRANSFORMACIÓN</span>
                         </h2>
                         <p class="text-gray-300 text-lg mb-8">
+                            {% if private_classes_enabled %}
                             ¿Listo para entrenar? Reserva tu clase particular y comienza tu camino hacia la maestría
                             marcial.
+                            {% else %}
+                            ¿Tienes alguna consulta o propuesta? Ponte en contacto directamente a través del formulario.
+                            {% endif %}
                         </p>
 
                         <!-- Google Maps Card - Climent Club (sin anidar iframe dentro de <a>) -->
@@ -735,7 +752,9 @@
                         <li><a href="#inicio" class="text-gray-300 hover:text-white transition text-sm py-1">Inicio</a></li>
                         <li><a href="#club" class="text-gray-300 hover:text-white transition text-sm py-1">El Club</a></li>
                         <li><a href="#sobre-mi" class="text-gray-300 hover:text-white transition text-sm py-1">Sobre Mí</a></li>
+                        {% if private_classes_enabled %}
                         <li><a href="#servicios" class="text-gray-300 hover:text-white transition text-sm py-1">Servicios</a></li>
+                        {% endif %}
                         <li><a href="#galeria" class="text-gray-300 hover:text-white transition text-sm py-1">Galería</a></li>
                         <li><a href="#contacto" class="text-gray-300 hover:text-white transition text-sm py-1">Contacto</a></li>
                     </ul>

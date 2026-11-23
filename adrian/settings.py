@@ -77,6 +77,9 @@ EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.console.
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='web@adrigalvez.com')
 CONTACT_NOTIFICATION_EMAIL = env('CONTACT_NOTIFICATION_EMAIL', default='contacto@adrigalvez.com')
 
+# Feature Flags
+PRIVATE_CLASSES_ENABLED = env.bool('PRIVATE_CLASSES_ENABLED', default=True)
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -124,6 +127,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "core.context_processors.csp_nonce",
+                "core.context_processors.site_features",
             ],
         },
     },

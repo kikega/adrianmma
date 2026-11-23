@@ -17,10 +17,20 @@ def get_active_fighter() -> Optional[FighterProfile]:
     """
     return FighterProfile.objects.filter(is_active=True).first()
 
+def is_private_classes_enabled() -> bool:
+    """
+    Indica si la sección de clases particulares está habilitada.
+    """
+    return bool(getattr(settings, 'PRIVATE_CLASSES_ENABLED', True))
+
+
 def get_active_services() -> QuerySet[Service]:
     """
     Obtiene todos los servicios activos ordenados por el campo order.
+    Si las clases particulares están deshabilitadas, devuelve un QuerySet vacío.
     """
+    if not is_private_classes_enabled():
+        return Service.objects.none()
     return Service.objects.filter(is_active=True).order_by('order')
 
 def get_gallery_items(media_type: str, limit: Optional[int] = None, featured_only: bool = False) -> QuerySet[Multimedia]:
@@ -67,13 +77,16 @@ def process_contact_message(data: Dict[str, Any]) -> Dict[str, Any]:
     # Enviar notificación por email al entrenador/administrador
     try:
         subject = f"[Web Contacto] Nuevo mensaje de {contact_message.name}"
-        service_label = contact_message.get_service_type_display() if contact_message.service_type else 'No especificado'
+        service_line = ""
+        if is_private_classes_enabled() or contact_message.service_type:
+            service_label = contact_message.get_service_type_display() if contact_message.service_type else 'No especificado'
+            service_line = f"Servicio de interés: {service_label}\n"
         body = (
             f"Has recibido un nuevo mensaje desde la web:\n\n"
             f"Nombre: {contact_message.name}\n"
             f"Email: {contact_message.email}\n"
             f"Teléfono: {contact_message.phone or 'No aportado'}\n"
-            f"Servicio de interés: {service_label}\n"
+            f"{service_line}"
             f"Fecha: {contact_message.created_at.strftime('%d/%m/%Y %H:%M')}\n\n"
             f"Mensaje:\n{contact_message.message}\n"
         )

@@ -263,6 +263,62 @@ class CoreViewsAndFormsTestCase(TestCase):
         req_no_real = rf.get('/', HTTP_X_FORWARDED_FOR='1.2.3.4, 203.0.113.9')
         self.assertEqual(get_client_ip(req_no_real), '203.0.113.9')
 
+    @override_settings(PRIVATE_CLASSES_ENABLED=True)
+    def test_private_classes_enabled_reads_prices_from_db(self):
+        """Cuando PRIVATE_CLASSES_ENABLED=True, muestra la sección y lee precios dinámicos de BBDD."""
+        self.service1.price_per_hour = 42.50
+        self.service1.save()
+
+        response = self.client.get(reverse('core:landing'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.context['private_classes_enabled'])
+        self.assertContains(response, 'id="servicios"')
+        self.assertContains(response, 'href="#servicios"')
+        self.assertContains(response, 'id="contact-service"')
+        self.assertContains(response, '42,50€')
+        self.assertContains(response, '40€')
+
+    @override_settings(PRIVATE_CLASSES_ENABLED=False)
+    def test_private_classes_disabled_hides_section_links_and_service_field(self):
+        """Cuando PRIVATE_CLASSES_ENABLED=False, oculta sección, enlaces y selector de clases."""
+        response = self.client.get(reverse('core:landing'))
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(response.context['private_classes_enabled'])
+        self.assertEqual(list(response.context['services']), [])
+        self.assertNotContains(response, 'id="servicios"')
+        self.assertNotContains(response, 'href="#servicios"')
+        self.assertNotContains(response, 'Ver Servicios')
+        self.assertNotContains(response, 'Reservar Clase')
+        self.assertNotContains(response, 'id="contact-service"')
+        self.assertNotContains(response, '35€')
+
+        # El fragmento HTMX del formulario tampoco debe incluir el selector de servicio
+        form_response = self.client.get(reverse('core:contact_form'))
+        self.assertEqual(form_response.status_code, 200)
+        self.assertNotContains(form_response, 'id="contact-service"')
+
+    @override_settings(PRIVATE_CLASSES_ENABLED=False)
+    def test_contact_submission_ignores_service_type_when_private_classes_disabled(self):
+        """Cuando PRIVATE_CLASSES_ENABLED=False, el contacto funciona e ignora service_type."""
+        payload = {
+            'name': 'Ana Torres',
+            'email': 'ana@example.com',
+            'phone': '',
+            'service_type': 'mma',
+            'message': 'Consulta general de colaboración.',
+            'website': '',
+        }
+        response = self.client.post(
+            reverse('core:contact'),
+            data=payload,
+            HTTP_HX_REQUEST='true',
+        )
+        self.assertEqual(response.status_code, 200)
+        saved = ContactMessage.objects.get(email='ana@example.com')
+        self.assertEqual(saved.service_type, '')
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertNotIn('Servicio de interés:', mail.outbox[0].body)
+
 
 @override_settings(
     ALLOWED_HOSTS=['adrian.egalvez.es', 'adrianadmin.egalvez.es', 'testserver'],

@@ -73,6 +73,7 @@
                 </div>
             </div>
 
+            {% if private_classes_enabled %}
             <div>
                 <label for="contact-service" class="block text-gray-300 text-sm mb-2">Tipo de clase</label>
                 {{ form.service_type }}
@@ -83,6 +84,7 @@
                 </p>
                 {% endif %}
             </div>
+            {% endif %}
 
             <div>
                 <label for="contact-message" class="block text-gray-300 text-sm mb-2">Mensaje *</label>

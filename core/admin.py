@@ -28,6 +28,7 @@ class FighterProfileAdmin(admin.ModelAdmin):
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ['name', 'price_per_hour', 'is_active', 'order']
     list_filter = ['is_active']
+    list_editable = ['price_per_hour', 'is_active', 'order']
     ordering = ['order']
 
 

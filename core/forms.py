@@ -1,4 +1,5 @@
 from django import forms
+from django.conf import settings
 from .models import ContactMessage, Service
 
 
@@ -110,6 +111,11 @@ class ContactMessageForm(forms.ModelForm):
         if not cleaned:
             raise forms.ValidationError('El nombre es requerido.')
         return cleaned
+
+    def clean_service_type(self):
+        if not getattr(settings, 'PRIVATE_CLASSES_ENABLED', True):
+            return ''
+        return self.cleaned_data.get('service_type', '')
 
     def clean_website(self):
         value = self.cleaned_data.get('website', '')
