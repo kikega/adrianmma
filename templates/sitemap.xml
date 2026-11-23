@@ -1,9 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
         <loc>https://adrigalvez.com/</loc>
-        <lastmod>2026-05-30</lastmod>
+        <lastmod>{{ lastmod }}</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://adrigalvez.com/static/images/adri-sangriento.webp</image:loc>
+            <image:title>Adrián Gálvez The Butcher - Luchador Profesional de MMA en Alicante</image:title>
+            <image:caption>Adrián Gálvez en combate de MMA profesional representando a Climent Club Alicante</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://adrigalvez.com/static/images/equipo-climent.webp</image:loc>
+            <image:title>Equipo Climent Club Alicante - MMA, Jiu-Jitsu Brasileño y Boxeo</image:title>
+            <image:caption>Equipo de competición de MMA y Jiu-Jitsu Brasileño en Climent Club Alicante</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://adrigalvez.com/static/images/adri-jorge-agus.webp</image:loc>
+            <image:title>Adrián Gálvez con Jorge Climent y Agustín Climent en Alicante</image:title>
+            <image:caption>Adrián Gálvez junto a los hermanos Jorge y Agustín Climent en Climent Club Alicante</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://adrigalvez.com/static/images/adri-guardia.webp</image:loc>
+            <image:title>Adrián Gálvez en guardia de Boxeo y MMA en Alicante</image:title>
+            <image:caption>Entrenamiento de Boxeo, Striking y MMA en Alicante con Adrián Gálvez</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://adrigalvez.com/static/images/adri-competicion.webp</image:loc>
+            <image:title>Jiu-Jitsu Brasileño, Grappling y Defensa Personal en Alicante</image:title>
+            <image:caption>Adrián Gálvez aplicando técnica de sumisión de Jiu-Jitsu Brasileño en Climent Club Alicante</image:caption>
+        </image:image>
     </url>
 </urlset>

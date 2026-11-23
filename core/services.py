@@ -87,6 +87,7 @@ def process_contact_message(data: Dict[str, Any]) -> Dict[str, Any]:
             f"Email: {contact_message.email}\n"
             f"Teléfono: {contact_message.phone or 'No aportado'}\n"
             f"{service_line}"
+            f"Consentimiento privacidad (RGPD/LOPDGDD): Aceptado expresamente\n"
             f"Fecha: {contact_message.created_at.strftime('%d/%m/%Y %H:%M')}\n\n"
             f"Mensaje:\n{contact_message.message}\n"
         )

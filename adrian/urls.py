@@ -3,10 +3,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from django.views.generic import TemplateView
+from core.views import sitemap_xml
 
 urlpatterns = [
     path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
-    path("sitemap.xml", TemplateView.as_view(template_name="sitemap.xml", content_type="application/xml")),
+    path("sitemap.xml", sitemap_xml, name="sitemap"),
     path("", include("core.urls", namespace="core")),
 ]
 

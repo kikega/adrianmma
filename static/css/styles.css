@@ -402,3 +402,32 @@ select.form-input option {
     font-size: 0.95rem !important;
     line-height: 1.5 !important;
 }
+
+/* Consent checkbox & cookie preferences */
+.consent-checkbox {
+    accent-color: #c41e3a;
+}
+
+.consent-checkbox[aria-invalid="true"],
+.consent-checkbox:user-invalid {
+    outline: 2px solid #f87171;
+    outline-offset: 2px;
+}
+
+/* Native <dialog> modal scroll containment & styling */
+dialog:modal {
+    overscroll-behavior: contain;
+}
+
+dialog::backdrop {
+    overflow: hidden;
+    overscroll-behavior: contain;
+    background-color: rgba(0, 0, 0, 0.78);
+    backdrop-filter: blur(4px);
+}
+
+dialog.cookie-dialog[open] {
+    margin: auto;
+    max-height: calc(100dvh - 2rem);
+    overflow-y: auto;
+}

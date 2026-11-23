@@ -14,6 +14,20 @@ class ContactMessageForm(forms.ModelForm):
         })
     )
 
+    # Consentimiento expreso RGPD / LOPDGDD para responder a la consulta
+    privacy_consent = forms.BooleanField(
+        required=True,
+        label='Acepto la Política de Privacidad y doy mi consentimiento para atender mi consulta',
+        widget=forms.CheckboxInput(attrs={
+            'id': 'contact-privacy-consent',
+            'class': 'consent-checkbox mt-0.5 h-5 w-5 shrink-0 rounded border border-white/30 bg-butcher-gray cursor-pointer',
+            'required': True,
+        }),
+        error_messages={
+            'required': 'Debes aceptar la Política de Privacidad y dar tu consentimiento para enviar el mensaje.',
+        },
+    )
+
     class Meta:
         model = ContactMessage
         fields = ['name', 'email', 'phone', 'service_type', 'message']

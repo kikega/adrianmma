@@ -1,0 +1,108 @@
+{% extends 'core/legal/base_legal.html' %}
+
+{% block title %}Política de Privacidad | Adrián Gálvez{% endblock %}
+{% block meta_description %}Política de privacidad de Adrián Gálvez conforme al RGPD (UE 2016/679) y LOPDGDD (LO 3/2018). Sin actividad económica ni tratamiento comercial de datos.{% endblock %}
+{% block legal_kicker %}RGPD (UE 2016/679) · LOPDGDD (LO 3/2018){% endblock %}
+{% block legal_heading %}POLÍTICA DE <span class="gold-text">PRIVACIDAD</span>{% endblock %}
+
+{% block legal_content %}
+<section class="space-y-3">
+    <h2 class="font-display text-xl sm:text-2xl font-bold text-white uppercase tracking-wide">
+        1. Responsable y ausencia de actividad económica
+    </h2>
+    <p>
+        En cumplimiento del <strong class="text-white">Reglamento (UE) 2016/679 (RGPD)</strong> y la <strong class="text-white">Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD)</strong>, te informamos de forma transparente sobre el uso de los datos que puedas facilitar a través de este sitio web:
+    </p>
+    <ul class="list-disc pl-6 space-y-1.5 text-gray-200">
+        <li><strong class="text-white">Titular / Responsable:</strong> Adrián Gálvez</li>
+        <li><strong class="text-white">Ubicación:</strong> Alicante, España</li>
+        <li><strong class="text-white">Correo de contacto:</strong> <a href="mailto:{{ fighter.email|default:contact_email }}" class="red-accent underline hover:text-white transition">{{ fighter.email|default:contact_email }}</a></li>
+    </ul>
+    <div class="p-4 rounded-lg bg-red-950/30 border border-red-900/50 text-gray-200 space-y-2">
+        <p class="font-medium text-white">Sin actividad económica ni tratamiento ulterior de datos</p>
+        <p class="text-sm leading-relaxed">
+            Esta página web es un espacio personal e informativo <strong class="text-white">sin ninguna actividad económica ni finalidad comercial</strong>.
+            <strong class="text-white">Los datos recogidos en el formulario de contacto no tendrán ningún tratamiento comercial, publicitario, de perfilado ni de incorporación a listas o bases de datos promocionales</strong>; se utilizan exclusivamente para leer y responder de manera puntual a la consulta enviada por el propio usuario.
+        </p>
+    </div>
+</section>
+
+<section class="space-y-3">
+    <h2 class="font-display text-xl sm:text-2xl font-bold text-white uppercase tracking-wide">
+        2. Datos recogidos y finalidad
+    </h2>
+    <p>
+        La navegación general por este sitio web no requiere registro ni aporta datos personales identificativos. Únicamente si decides utilizar voluntariamente el <strong class="text-white">formulario de contacto</strong>, nos facilitarás:
+    </p>
+    <ul class="list-disc pl-6 space-y-1.5">
+        <li>Nombre completo</li>
+        <li>Dirección de correo electrónico</li>
+        <li>Teléfono (campo estrictamente opcional)</li>
+        <li>Mensaje o consulta planteada</li>
+    </ul>
+    <p>
+        <strong class="text-white">Finalidad exclusiva:</strong> atender y responder a tu solicitud de información o mensaje. No se elaboran perfiles, no se toman decisiones automatizadas y no se realiza ningún tratamiento posterior con los datos aportados.
+    </p>
+</section>
+
+<section class="space-y-3">
+    <h2 class="font-display text-xl sm:text-2xl font-bold text-white uppercase tracking-wide">
+        3. Base jurídica (Legitimación)
+    </h2>
+    <p>
+        La base legal para recibir y contestar tu consulta es tu <strong class="text-white">consentimiento libre, específico, informado e inequívoco</strong> (artículo 6.1.a del RGPD), otorgado expresamente al marcar la casilla de aceptación obligatoria del formulario antes de pulsar «Enviar Mensaje». Puedes retirar tu consentimiento en cualquier momento.
+    </p>
+</section>
+
+<section class="space-y-3">
+    <h2 class="font-display text-xl sm:text-2xl font-bold text-white uppercase tracking-wide">
+        4. Conservación de los datos
+    </h2>
+    <p>
+        Los datos enviados mediante el formulario se conservan únicamente durante el tiempo estrictamente indispensable para leer y responder a tu consulta, procediendo posteriormente a su supresión, salvo que exista una obligación legal que exija su bloqueo.
+    </p>
+</section>
+
+<section class="space-y-3">
+    <h2 class="font-display text-xl sm:text-2xl font-bold text-white uppercase tracking-wide">
+        5. Destinatarios y transferencias internacionales
+    </h2>
+    <p>
+        <strong class="text-white">No se ceden ni comunican datos personales a terceros</strong>, ni se venden ni comparten con fines publicitarios o comerciales, salvo obligación legal expresa.
+    </p>
+    <p>
+        En caso de que actives voluntariamente el mapa interactivo embebido de Google Maps en el panel de cookies, tu navegador se conectará directamente con los servidores de Google LLC conforme a sus propias condiciones de privacidad. Por defecto, dicho contenido permanece bloqueado.
+    </p>
+</section>
+
+<section class="space-y-3">
+    <h2 class="font-display text-xl sm:text-2xl font-bold text-white uppercase tracking-wide">
+        6. Derechos de las personas interesadas
+    </h2>
+    <p>
+        De conformidad con los artículos 15 a 22 del RGPD y los artículos 12 a 18 de la LOPDGDD, puedes ejercer gratuitamente en cualquier momento los derechos de:
+    </p>
+    <ul class="list-disc pl-6 space-y-1.5">
+        <li><strong class="text-white">Acceso:</strong> conocer si disponemos de algún dato tuyo.</li>
+        <li><strong class="text-white">Rectificación:</strong> solicitar la corrección de datos inexactos.</li>
+        <li><strong class="text-white">Supresión:</strong> solicitar la eliminación inmediata de tu mensaje y datos de contacto.</li>
+        <li><strong class="text-white">Oposición, limitación y portabilidad</strong> en los supuestos previstos legalmente.</li>
+        <li><strong class="text-white">Retirada del consentimiento</strong> en cualquier momento sin que ello afecte a la licitud previa.</li>
+    </ul>
+    <p>
+        Para ejercer cualquiera de estos derechos, escribe un correo electrónico a
+        <a href="mailto:{{ fighter.email|default:contact_email }}" class="red-accent underline hover:text-white transition">{{ fighter.email|default:contact_email }}</a>
+        indicando tu solicitud. Asimismo, tienes derecho a presentar una reclamación ante la autoridad de control competente:
+        <strong class="text-white">Agencia Española de Protección de Datos (AEPD)</strong> (<a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer" class="red-accent underline hover:text-white transition">www.aepd.es</a>).
+    </p>
+</section>
+
+<section class="space-y-3">
+    <h2 class="font-display text-xl sm:text-2xl font-bold text-white uppercase tracking-wide">
+        7. Medidas de seguridad
+    </h2>
+    <p>
+        Este sitio web aplica medidas técnicas y organizativas acordes a la normativa vigente, incluyendo cifrado de comunicaciones HTTPS/TLS, protección contra ataques CSRF, política de seguridad de contenidos (CSP) y control de acceso restringido.
+    </p>
+</section>
+{% endblock %}

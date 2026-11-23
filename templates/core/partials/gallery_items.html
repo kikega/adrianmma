@@ -5,7 +5,7 @@
         {% if item.media_type == 'foto' %}
             {% if item.image %}
             <a href="{{ item.image.url }}" class="glightbox gallery-item group relative block overflow-hidden rounded-lg aspect-square cursor-pointer transition animate-fade-in" data-gallery="gallery-fotos" data-title="{{ item.title }}" data-description="{{ item.description }}">
-                <img src="{{ item.image.url }}" alt="{{ item.title }}" loading="lazy" class="w-full h-full object-cover">
+                <img src="{{ item.image.url }}" alt="{{ item.title }} - Adrián Gálvez MMA, Jiu-Jitsu y Boxeo en Climent Club Alicante" loading="lazy" decoding="async" class="w-full h-full object-cover">
                 <div class="absolute inset-0 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition duration-300 flex items-center justify-center z-20 p-4">
                     <p class="text-white font-display text-base sm:text-lg tracking-wider uppercase text-center">{{ item.title }}</p>
                 </div>
@@ -15,7 +15,7 @@
             {% if item.video_url or item.video_file %}
             <a href="{% if item.video_url %}{{ item.video_url }}{% else %}{{ item.video_file.url }}{% endif %}" class="glightbox-video gallery-item group relative block overflow-hidden rounded-lg aspect-video cursor-pointer transition animate-fade-in" data-gallery="gallery-videos" data-title="{{ item.title }}" data-description="{{ item.description }}">
                 {% if item.image %}
-                <img src="{{ item.image.url }}" alt="{{ item.title }}" loading="lazy" class="w-full h-full object-cover">
+                <img src="{{ item.image.url }}" alt="{{ item.title }} - Vídeo de MMA y Jiu-Jitsu en Climent Club Alicante" loading="lazy" decoding="async" class="w-full h-full object-cover">
                 {% else %}
                 <div class="w-full h-full bg-gray-900 flex items-center justify-center">
                     <i class="fas fa-video text-gray-500 text-4xl" aria-hidden="true"></i>

@@ -5,100 +5,267 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adrián Gálvez "The Butcher" | {% if private_classes_enabled %}Clases de MMA, Jiu-Jitsu y Boxeo en Alicante{% else %}Luchador Profesional de MMA en Alicante{% endif %}</title>
-    <meta name="description" content="{% if private_classes_enabled %}¿Buscas clases de MMA, Jiu-Jitsu o Boxeo en Alicante? Entrena con Adrián Gálvez 'The Butcher', luchador profesional de MMA en Climent Club. Clases particulares y de alto rendimiento.{% else %}Adrián Gálvez 'The Butcher', luchador profesional de MMA, cinturón negro de Jiu-Jitsu Brasileño y competidor en Climent Club Alicante.{% endif %}">
-    <meta name="keywords" content="Adrián Gálvez, The Butcher, Climent Club Alicante, MMA Alicante, clases de MMA Alicante, entrenador de Jiu-Jitsu, clases de boxeo Alicante, defensa personal Alicante, entrenamiento MMA profesional, UFC, BJJ Alicante, luchador profesional, artes marciales Alicante, Climent hermanos, boxeo profesional">
+    <title>{% if private_classes_enabled %}Clases MMA, Jiu-Jitsu y Boxeo Alicante | Adrián Gálvez{% else %}Adrián Gálvez | MMA, BJJ y Boxeo en Climent Club Alicante{% endif %}</title>
+    <meta name="description" content="{% if private_classes_enabled %}Clases de MMA, Jiu-Jitsu Brasileño (BJJ), Boxeo y Defensa Personal en Alicante con Adrián Gálvez 'The Butcher' en Climent Club. ¡Reserva tu entrenamiento!{% else %}Adrián Gálvez 'The Butcher', luchador profesional de MMA, Jiu-Jitsu Brasileño (BJJ), Boxeo y Defensa Personal en Climent Club Alicante. Trayectoria y contacto.{% endif %}">
+    <meta name="keywords" content="Adrián Gálvez, The Butcher, Climent Club Alicante, MMA Alicante, clases de MMA Alicante, Jiu-Jitsu Brasileño Alicante, BJJ Alicante, clases de Jiu-Jitsu Alicante, Grappling Alicante, Boxeo Alicante, clases de boxeo Alicante, defensa personal Alicante, clases defensa personal Alicante, artes marciales mixtas Alicante, entrenamiento MMA profesional, hermanos Climent, Jorge Climent, Agustín Climent, gimnasio MMA Alicante, UFC, WAR MMA, Karate Goju Ryu">
     <meta name="author" content="Adrián Gálvez - The Butcher">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="htmx-config" content='{"allowScriptTags":false,"allowEval":false,"includeIndicatorStyles":false}'>
     <meta name="geo.region" content="ES-A">
     <meta name="geo.placename" content="Alicante">
+    <meta name="geo.position" content="38.3645;-0.4751">
+    <meta name="ICBM" content="38.3645, -0.4751">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Adrián Gálvez 'The Butcher' | MMA Profesional en Alicante">
-    <meta property="og:description" content="Entrena MMA, Jiu-Jitsu Brasileño, Boxeo y Defensa Personal con el luchador profesional Adrián Gálvez en el legendario Climent Club.">
+    <meta property="og:title" content="{% if private_classes_enabled %}Adrián Gálvez 'The Butcher' | Clases de MMA, Jiu-Jitsu, Boxeo y Defensa Personal en Alicante{% else %}Adrián Gálvez 'The Butcher' | Luchador de MMA, Jiu-Jitsu y Boxeo en Climent Club Alicante{% endif %}">
+    <meta property="og:description" content="{% if private_classes_enabled %}Entrena MMA, Jiu-Jitsu Brasileño (BJJ), Boxeo y Defensa Personal en Alicante con el luchador profesional Adrián Gálvez en Climent Club.{% else %}Luchador profesional de MMA, cinturón negro de Jiu-Jitsu Brasileño (BJJ) y especialista en Boxeo y Defensa Personal en Climent Club Alicante.{% endif %}">
     <meta property="og:type" content="profile">
-    <meta property="og:url" content="https://adrigalvez.com">
+    <meta property="profile:first_name" content="Adrián">
+    <meta property="profile:last_name" content="Gálvez">
+    <meta property="profile:username" content="adrigalvez17">
+    <meta property="og:url" content="https://adrigalvez.com/">
     <meta property="og:image" content="https://adrigalvez.com/static/images/adri-sangriento.webp">
-    <meta property="og:site_name" content="Adrián Gálvez">
+    <meta property="og:image:alt" content="Adrián Gálvez The Butcher - Luchador Profesional de MMA, Jiu-Jitsu y Boxeo en Climent Club Alicante">
+    <meta property="og:site_name" content="Adrián Gálvez - MMA Alicante">
     <meta property="og:locale" content="es_ES">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Adrián Gálvez 'The Butcher' | MMA y Boxeo Alicante">
-    <meta name="twitter:description" content="{% if private_classes_enabled %}Clases particulares y entrenamiento de MMA y BJJ en Climent Club Alicante con el luchador profesional Adrián Gálvez.{% else %}Luchador profesional de MMA y BJJ en Climent Club Alicante: Adrián Gálvez 'The Butcher'.{% endif %}">
+    <meta name="twitter:title" content="{% if private_classes_enabled %}Adrián Gálvez | MMA, Jiu-Jitsu, Boxeo y Defensa Personal en Alicante{% else %}Adrián Gálvez 'The Butcher' | MMA, BJJ y Boxeo en Climent Club Alicante{% endif %}">
+    <meta name="twitter:description" content="{% if private_classes_enabled %}Clases particulares de MMA, Jiu-Jitsu Brasileño, Boxeo y Defensa Personal en Climent Club Alicante con Adrián Gálvez.{% else %}Luchador profesional de MMA, Jiu-Jitsu Brasileño y Boxeo en Climent Club Alicante: Adrián Gálvez 'The Butcher'.{% endif %}">
     <meta name="twitter:site" content="@adrigalvez17">
     <meta name="twitter:creator" content="@adrigalvez17">
     <meta name="twitter:image" content="https://adrigalvez.com/static/images/adri-sangriento.webp">
+    <meta name="twitter:image:alt" content="Adrián Gálvez The Butcher - MMA, Jiu-Jitsu y Boxeo en Climent Club Alicante">
 
-    <link rel="canonical" href="https://adrigalvez.com">
+    <link rel="canonical" href="https://adrigalvez.com/">
+    <link rel="alternate" hreflang="es-ES" href="https://adrigalvez.com/">
+    <link rel="alternate" hreflang="x-default" href="https://adrigalvez.com/">
     <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
 
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
-    [
-        {
-            "@context": "https://schema.org",
-            "@type": "Person",
-            "@id": "https://adrigalvez.com/#person",
-            "name": "Adrián Gálvez",
-            "alternateName": "{{ fighter.nickname|default:'The Butcher'|escapejs }}",
-            "jobTitle": "Luchador Profesional de MMA / Entrenador",
-            "description": "Luchador profesional de artes marciales mixtas, cinturón negro de Jiu-Jitsu Brasileño e instructor de Boxeo y Defensa Personal en Alicante. Entrena en Climent Club.",
-            "url": "https://adrigalvez.com",
-            "image": "https://adrigalvez.com/static/images/adri-sangriento.webp",
-            "sameAs": [
-                {% for sn in social_networks %}"{{ sn.url|escapejs }}"{% if not forloop.last %},{% endif %}{% empty %}"https://instagram.com/adrigalvez17"{% endfor %}
-            ],
-            "knowsAbout": [
-                "Mixed Martial Arts",
-                "Brazilian Jiu-Jitsu",
-                "Boxing",
-                "Self Defense",
-                "UFC",
-                "PFL",
-                "WAR MMA"
-            ],
-            "sport": "https://en.wikipedia.org/wiki/Mixed_martial_arts"
-        },
-        {
-            "@context": "https://schema.org",
-            "@type": "SportsActivityLocation",
-            "@id": "https://adrigalvez.com/#business",
-            "name": "Entrenamiento de MMA y Boxeo Adrián Gálvez - Climent Club",
-            "description": "{% if private_classes_enabled %}Entrenamiento profesional y clases particulares de MMA, Jiu-Jitsu Brasileño (BJJ), Boxeo y Defensa Personal en Alicante dirigidas por el luchador Adrián Gálvez 'The Butcher' en el prestigioso gimnasio Climent Club.{% else %}Entrenamiento profesional de MMA, Jiu-Jitsu Brasileño (BJJ), Boxeo y Defensa Personal en Alicante con el luchador Adrián Gálvez 'The Butcher' en el prestigioso gimnasio Climent Club.{% endif %}",
-            "url": "https://adrigalvez.com",
-            "image": "https://adrigalvez.com/static/images/equipo-climent.webp",
-            "priceRange": "$$",
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "C. Burgos, 8",
-                "addressLocality": "Alicante",
-                "addressRegion": "Alicante",
-                "postalCode": "03015",
-                "addressCountry": "ES"
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "@id": "https://adrigalvez.com/#website",
+                "url": "https://adrigalvez.com/",
+                "name": "Adrián Gálvez 'The Butcher' - MMA, Jiu-Jitsu, Boxeo y Defensa Personal en Alicante",
+                "inLanguage": "es-ES",
+                "publisher": {
+                    "@id": "https://adrigalvez.com/#person"
+                }
             },
-            "geo": {
-                "@type": "GeoCoordinates",
-                "latitude": "38.3645",
-                "longitude": "-0.4751"
+            {
+                "@type": "ProfilePage",
+                "@id": "https://adrigalvez.com/#webpage",
+                "url": "https://adrigalvez.com/",
+                "name": "{% if private_classes_enabled %}Clases MMA, Jiu-Jitsu y Boxeo Alicante | Adrián Gálvez{% else %}Adrián Gálvez | MMA, BJJ y Boxeo en Climent Club Alicante{% endif %}",
+                "inLanguage": "es-ES",
+                "isPartOf": {
+                    "@id": "https://adrigalvez.com/#website"
+                },
+                "mainEntity": {
+                    "@id": "https://adrigalvez.com/#person"
+                },
+                "about": {
+                    "@id": "https://adrigalvez.com/#business"
+                }
             },
-            "openingHoursSpecification": {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": [
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                    "Saturday"
+            {
+                "@type": "Person",
+                "@id": "https://adrigalvez.com/#person",
+                "name": "Adrián Gálvez",
+                "alternateName": "{{ fighter.nickname|default:'The Butcher'|escapejs }}",
+                "jobTitle": "{% if private_classes_enabled %}Luchador Profesional de MMA y Entrenador de Jiu-Jitsu, Boxeo y Defensa Personal{% else %}Luchador Profesional de MMA y Especialista en Jiu-Jitsu Brasileño y Boxeo{% endif %}",
+                "description": "Luchador profesional de artes marciales mixtas (MMA), cinturón negro de Jiu-Jitsu Brasileño (BJJ) y de Karate Goju Ryu, especialista en Boxeo y Defensa Personal en Climent Club Alicante.",
+                "url": "https://adrigalvez.com/",
+                "image": "https://adrigalvez.com/static/images/adri-sangriento.webp",
+                "homeLocation": {
+                    "@type": "Place",
+                    "name": "Alicante, España"
+                },
+                "affiliation": {
+                    "@id": "https://adrigalvez.com/#club"
+                },
+                "workLocation": {
+                    "@id": "https://adrigalvez.com/#business"
+                },
+                "award": [
+                    "Campeón de España Amateur MMA IMAF 2021",
+                    "Cinturón Negro de Jiu-Jitsu Brasileño (BJJ)",
+                    "Cinturón Negro de Karate Goju Ryu"
                 ],
-                "opens": "08:00",
-                "closes": "22:00"
+                "sameAs": [
+                    {% for sn in social_networks %}"{{ sn.url|escapejs }}"{% if not forloop.last %},{% endif %}{% empty %}"https://instagram.com/adrigalvez17"{% endfor %}
+                ],
+                "knowsAbout": [
+                    "MMA",
+                    "Artes Marciales Mixtas",
+                    "Mixed Martial Arts",
+                    "Jiu-Jitsu Brasileño",
+                    "Brazilian Jiu-Jitsu",
+                    "BJJ",
+                    "Grappling",
+                    "Boxeo",
+                    "Boxing",
+                    "Defensa Personal",
+                    "Self Defense",
+                    "Karate Goju Ryu",
+                    "Climent Club Alicante",
+                    "UFC",
+                    "WAR MMA"
+                ],
+                "sport": "https://en.wikipedia.org/wiki/Mixed_martial_arts"
+            },
+            {
+                "@type": "SportsClub",
+                "@id": "https://adrigalvez.com/#club",
+                "name": "Climent Club Alicante",
+                "description": "Gimnasio de referencia internacional en artes marciales mixtas (MMA), Jiu-Jitsu Brasileño (BJJ), Grappling, Boxeo y Defensa Personal en Alicante, dirigido por los hermanos Jorge Climent y Agustín Climent.",
+                "image": "https://adrigalvez.com/static/images/equipo-climent.webp",
+                "sport": [
+                    "Mixed Martial Arts",
+                    "Brazilian Jiu-Jitsu",
+                    "Boxing",
+                    "Grappling",
+                    "Self Defense"
+                ],
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "C. Burgos, 8",
+                    "addressLocality": "Alicante",
+                    "addressRegion": "Alicante",
+                    "postalCode": "03015",
+                    "addressCountry": "ES"
+                },
+                "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 38.3645,
+                    "longitude": -0.4751
+                }
+            },
+            {
+                "@type": "SportsActivityLocation",
+                "@id": "https://adrigalvez.com/#business",
+                "name": "Entrenamiento de MMA, Jiu-Jitsu, Boxeo y Defensa Personal - Adrián Gálvez (Climent Club Alicante)",
+                "description": "{% if private_classes_enabled %}Entrenamiento profesional y clases particulares de MMA, Jiu-Jitsu Brasileño (BJJ), Grappling, Boxeo y Defensa Personal en Alicante dirigidas por Adrián Gálvez 'The Butcher' en Climent Club.{% else %}Entrenamiento profesional de MMA, Jiu-Jitsu Brasileño (BJJ), Grappling, Boxeo y Defensa Personal en Alicante con el luchador Adrián Gálvez 'The Butcher' en Climent Club.{% endif %}",
+                "url": "https://adrigalvez.com/",
+                "image": "https://adrigalvez.com/static/images/equipo-climent.webp",
+                "priceRange": "$$",
+                "sport": [
+                    "MMA",
+                    "Jiu-Jitsu Brasileño",
+                    "Boxeo",
+                    "Defensa Personal",
+                    "Grappling"
+                ],
+                "areaServed": [
+                    {
+                        "@type": "City",
+                        "name": "Alicante"
+                    },
+                    {
+                        "@type": "AdministrativeArea",
+                        "name": "Provincia de Alicante"
+                    }
+                ],
+                "hasMap": "https://www.google.com/maps/search/?api=1&query=Climent+Club,+C.+Burgos,+8,+03015+Alicante",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "C. Burgos, 8",
+                    "addressLocality": "Alicante",
+                    "addressRegion": "Alicante",
+                    "postalCode": "03015",
+                    "addressCountry": "ES"
+                },
+                "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 38.3645,
+                    "longitude": -0.4751
+                },
+                "openingHoursSpecification": {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                        "Saturday"
+                    ],
+                    "opens": "08:00",
+                    "closes": "22:00"
+                }{% if private_classes_enabled and services %},
+                "hasOfferCatalog": {
+                    "@type": "OfferCatalog",
+                    "name": "Clases particulares de MMA, Jiu-Jitsu, Boxeo y Defensa Personal en Alicante",
+                    "itemListElement": [
+                        {% for service in services %}{
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "Clases de {{ service.get_name_display|escapejs }} en Alicante",
+                                "description": "{{ service.description|default:service.get_name_display|escapejs }}",
+                                "areaServed": "Alicante"
+                            }{% if service.price_per_hour %},
+                            "price": "{{ service.price_per_hour|stringformat:'.2f' }}",
+                            "priceCurrency": "EUR"{% endif %}
+                        }{% if not forloop.last %},{% endif %}{% endfor %}
+                    ]
+                }{% endif %}
+            },
+            {
+                "@type": "FAQPage",
+                "@id": "https://adrigalvez.com/#faq",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "¿Dónde se realizan los entrenamientos de MMA, Jiu-Jitsu y Boxeo en Alicante?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "{% if private_classes_enabled %}Las clases particulares y entrenamientos con Adrián Gálvez se realizan en Climent Club Alicante (C. Burgos, 8, 03015 Alicante), el gimnasio de referencia internacional en MMA, Jiu-Jitsu Brasileño (BJJ), Boxeo y Defensa Personal fundado por los hermanos Jorge y Agustín Climent.{% else %}Adrián Gálvez entrena diariamente en Climent Club Alicante (C. Burgos, 8, 03015 Alicante), el gimnasio de referencia internacional en MMA, Jiu-Jitsu Brasileño (BJJ), Boxeo y Defensa Personal fundado por los hermanos Jorge y Agustín Climent.{% endif %}"
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "¿Qué disciplinas de artes marciales y deportes de contacto se trabajan?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Se trabajan cuatro pilares principales: MMA (Artes Marciales Mixtas), Jiu-Jitsu Brasileño (BJJ en modalidades Gi y No-Gi / Grappling), Boxeo y striking técnico, y Defensa Personal práctica aplicada a situaciones reales."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "¿Necesito experiencia previa para empezar MMA, Boxeo o Defensa Personal en Alicante?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "No es necesaria experiencia previa. El entrenamiento se adapta progresivamente tanto a principiantes que buscan ponerse en forma o aprender defensa personal desde cero como a deportistas amateur y profesionales que preparan competición."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "¿Qué diferencia hay entre MMA, Jiu-Jitsu Brasileño (BJJ) y Boxeo?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "El Boxeo se centra en la técnica de puño, desplazamientos y defensa en pie; el Jiu-Jitsu Brasileño (BJJ) domina la lucha en el suelo, el control posicional y las sumisiones; y el MMA combina el striking, la lucha y el grappling en un combate integral."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "¿Cómo puedo contactar con Adrián Gálvez en Climent Club Alicante?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "{% if private_classes_enabled %}Puedes solicitar información y reservar tu clase particular de MMA, Jiu-Jitsu, Boxeo o Defensa Personal directamente a través del formulario de contacto de esta web o escribiendo por Instagram a @adrigalvez17.{% else %}Puedes enviar tu consulta, propuesta de colaboración o mensaje directamente desde el formulario de contacto de esta web o a través de Instagram en @adrigalvez17.{% endif %}"
+                        }
+                    }
+                ]
             }
-        }
-    ]
+        ]
+    }
     </script>
 
     <!-- Resource Hints & LCP Preload -->
@@ -111,12 +278,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/glightbox.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/output.css' %}?v=20261115-2">
+    <link rel="stylesheet" href="{% static 'css/output.css' %}?v=20261123-2">
 
     <!-- Scripts (deferred, con nonce CSP) -->
     <script src="{% static 'django_htmx/htmx.min.js' %}" nonce="{{ csp_nonce }}" defer></script>
     <script src="{% static 'js/glightbox.min.js' %}" nonce="{{ csp_nonce }}" defer></script>
-    <script src="{% static 'js/main.js' %}?v=20261115-2" nonce="{{ csp_nonce }}" defer></script>
+    <script src="{% static 'js/main.js' %}?v=20261123-2" nonce="{{ csp_nonce }}" defer></script>
 </head>
 
 <body class="pattern-bg">
@@ -186,19 +353,22 @@
                 <!-- SEO Keywords -->
                 <ul class="flex flex-wrap justify-center gap-2 mb-6" aria-label="Especialidades destacadas">
                     <li class="seo-tag">MMA Alicante</li>
-                    <li class="seo-tag">UFC</li>
-                    <li class="seo-tag">PFL</li>
-                    <li class="seo-tag">Jiu-Jitsu</li>
+                    <li class="seo-tag">Climent Club</li>
+                    <li class="seo-tag">Jiu-Jitsu (BJJ)</li>
                     <li class="seo-tag">Boxeo</li>
                     <li class="seo-tag">Defensa Personal</li>
+                    <li class="seo-tag">Grappling</li>
                 </ul>
 
                 <div class="inline-block px-5 py-2 border border-red-900/50 rounded-full bg-red-900/10 backdrop-blur-sm text-red-400 text-base md:text-xl lg:text-2xl font-display uppercase tracking-[0.2em] sm:tracking-[0.4em] mb-6">
-                    Luchador Profesional MMA
+                    Luchador Profesional MMA · Climent Club Alicante
                 </div>
 
                 <h1 class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-2 tracking-tight">
                     ADRIÁN <span class="red-accent">GÁLVEZ</span>
+                    <span class="block text-base sm:text-xl md:text-2xl font-medium text-gray-200 tracking-[0.15em] uppercase mt-3">
+                        {% if private_classes_enabled %}MMA, Jiu-Jitsu, Boxeo y Defensa Personal en Alicante{% else %}Luchador Profesional de MMA, Jiu-Jitsu y Boxeo en Alicante{% endif %}
+                    </span>
                 </h1>
 
                 <p class="font-display text-2xl sm:text-3xl md:text-4xl gold-text uppercase tracking-[0.2em] mb-6">"{{ fighter.nickname|default:'The Butcher' }}"</p>
@@ -253,9 +423,10 @@
                         CLIMENT <span class="gold-text">CLUB</span> ALICANTE
                     </h2>
                     <p class="text-gray-300 max-w-2xl mx-auto">
-                        Entrena en el gimnasio de referencia internacional de artes marciales mixtas. La cuna de
-                        campeones de la UFC y el lugar donde realizamos preparación física y entrenamiento de MMA
-                        profesional de élite en Alicante.
+                        Entrena en el gimnasio de referencia internacional en <strong class="text-white font-medium">artes marciales mixtas (MMA)</strong>,
+                        <strong class="text-white font-medium">Jiu-Jitsu Brasileño (BJJ)</strong>, <strong class="text-white font-medium">Boxeo</strong> y
+                        <strong class="text-white font-medium">Defensa Personal en Alicante</strong>. Fundado por los hermanos Jorge y Agustín Climent,
+                        Climent Club (C. Burgos, 8) es cuna de campeones de la UFC y sede de nuestra preparación de alto rendimiento.
                     </p>
                 </div>
 
@@ -263,10 +434,11 @@
                 <div class="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto mb-12">
                     <div class="relative rounded-lg overflow-hidden">
                         <img src="{% static 'images/equipo-climent.webp' %}"
-                             alt="Equipo de competición de Climent Club Alicante - Entrenamiento de MMA y Jiu-Jitsu"
+                             alt="Equipo de competición de Climent Club Alicante - Entrenamiento de MMA y Jiu-Jitsu Brasileño"
                              width="1286"
                              height="1164"
                              loading="lazy"
+                             decoding="async"
                              class="w-full h-80 object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end justify-center pb-6">
                             <p class="text-white font-display text-2xl font-bold">Equipo <span class="gold-text">Climent</span></p>
@@ -274,10 +446,11 @@
                     </div>
                     <div class="relative rounded-lg overflow-hidden">
                         <img src="{% static 'images/adri-jorge-agus.webp' %}"
-                             alt="Adrián 'The Butcher' Gálvez con los fundadores y entrenadores Jorge Climent y Agustín Climent"
+                             alt="Adrián 'The Butcher' Gálvez con los fundadores y entrenadores Jorge Climent y Agustín Climent en Alicante"
                              width="1399"
                              height="1164"
                              loading="lazy"
+                             decoding="async"
                              class="w-full h-80 object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end justify-center pb-6">
                             <p class="text-white font-display text-2xl font-bold"><span class="gold-text">Jorge</span>
@@ -345,10 +518,11 @@
                     <div class="relative max-w-md mx-auto w-full">
                         <div class="relative z-10">
                             <img src="{% static 'images/adri-guardia.webp' %}"
-                                 alt="Adrián 'The Butcher' Gálvez en guardia de boxeo y MMA profesional - Alicante"
+                                 alt="Adrián 'The Butcher' Gálvez en guardia de boxeo y MMA profesional en Climent Club Alicante"
                                  width="690"
                                  height="808"
                                  loading="lazy"
+                                 decoding="async"
                                  class="rounded-lg shadow-2xl w-full h-auto border-2 border-red-900/30">
                         </div>
                         <div class="absolute -bottom-6 -right-6 bg-gradient-to-br from-red-900 to-red-700 p-6 rounded-lg shadow-xl z-20 hidden md:block">
@@ -362,7 +536,7 @@
                     <div class="overlay p-8 rounded-lg backdrop-blur-sm">
                         <span class="red-accent font-display uppercase tracking-widest text-sm">Sobre Mí</span>
                         <h2 class="font-display text-4xl md:text-5xl font-bold text-white mt-2 mb-6">
-                            ENTRENAMIENTO PROFESIONAL DE <span class="gold-text">MMA Y JIU-JITSU</span>
+                            {% if private_classes_enabled %}ENTRENAMIENTO DE <span class="gold-text">MMA, JIU-JITSU Y BOXEO</span> EN ALICANTE{% else %}LUCHADOR DE <span class="gold-text">MMA, JIU-JITSU Y BOXEO</span> EN ALICANTE{% endif %}
                         </h2>
 
                         <p class="text-gray-200 text-lg leading-relaxed mb-6">
@@ -373,27 +547,27 @@
                             cuna de campeones mundiales.
                         </p>
                         <p class="text-gray-300 leading-relaxed mb-8">
-                            He dedicado mi vida a perfeccionar las disciplinas de combate. Mi misión es ofrecerte un
-                            entrenamiento integral y adaptado, ya sea para competir al máximo nivel o para adquirir
-                            sólidas bases de defensa personal en Alicante.
+                            He dedicado mi vida a perfeccionar las artes marciales y deportes de contacto. Mi enfoque combina
+                            <span class="text-white font-medium">Boxeo y striking</span>, <span class="text-white font-medium">Grappling y Jiu-Jitsu Brasileño</span>
+                            y <span class="text-white font-medium">Defensa Personal en Alicante</span>, tanto para competir al máximo nivel como para adquirir seguridad y forma física.
                         </p>
 
                         <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                             <li class="flex items-center gap-3">
                                 <i class="fas fa-check-circle red-accent text-lg" aria-hidden="true"></i>
-                                <span class="text-gray-200">MMA Competitivo</span>
+                                <span class="text-gray-200">MMA Competitivo y Amateur</span>
                             </li>
                             <li class="flex items-center gap-3">
                                 <i class="fas fa-check-circle red-accent text-lg" aria-hidden="true"></i>
-                                <span class="text-gray-200">Jiu-Jitsu Brasilero</span>
+                                <span class="text-gray-200">Jiu-Jitsu Brasileño (BJJ)</span>
                             </li>
                             <li class="flex items-center gap-3">
                                 <i class="fas fa-check-circle red-accent text-lg" aria-hidden="true"></i>
-                                <span class="text-gray-200">Boxeo</span>
+                                <span class="text-gray-200">Boxeo y Striking</span>
                             </li>
                             <li class="flex items-center gap-3">
                                 <i class="fas fa-check-circle red-accent text-lg" aria-hidden="true"></i>
-                                <span class="text-gray-200">Defensa Personal</span>
+                                <span class="text-gray-200">Defensa Personal en Alicante</span>
                             </li>
                         </ul>
 
@@ -411,11 +585,11 @@
         <section id="servicios" class="parallax service-parallax py-24 sm:py-32">
             <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
-                    <span class="red-accent font-display uppercase tracking-widest text-sm">Servicios</span>
+                    <span class="red-accent font-display uppercase tracking-widest text-sm">Servicios en Alicante</span>
                     <h2 class="font-display text-4xl md:text-5xl font-bold text-white mt-2 mb-4">
-                        ENTRENAMIENTOS <span class="gold-text">ESPECIALIZADOS</span>
+                        CLASES DE <span class="gold-text">MMA, JIU-JITSU, BOXEO Y DEFENSA PERSONAL</span>
                     </h2>
-                    <p class="text-gray-300">Clases particulares adaptadas a tu nivel y objetivos</p>
+                    <p class="text-gray-300 max-w-2xl mx-auto">Clases particulares en Climent Club Alicante adaptadas a tu nivel, desde iniciación hasta competición</p>
                 </div>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -462,7 +636,7 @@
                                 <i class="fas fa-shield-alt red-accent text-2xl" aria-hidden="true"></i>
                             </div>
                             <h3 class="font-display text-xl font-bold text-white mb-2">Defensa Personal</h3>
-                            <p class="text-gray-300 text-sm mb-4">Técnicas de protección y control</p>
+                            <p class="text-gray-300 text-sm mb-4">Técnicas prácticas de protección, escape y control en Alicante</p>
                         </div>
                         <div class="mt-4 pt-3 border-t border-red-900/30">
                             <a href="#contacto" data-select-service="defensa_personal" class="inline-flex items-center justify-center gap-1.5 text-xs font-display uppercase tracking-wider text-red-400 hover:text-white border border-red-900/50 hover:border-red-500 hover:bg-red-900/30 px-4 py-2 rounded transition">
@@ -476,8 +650,8 @@
                             <div class="w-16 h-16 bg-red-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <i class="fas fa-hand-rock red-accent text-2xl" aria-hidden="true"></i>
                             </div>
-                            <h3 class="font-display text-xl font-bold text-white mb-2">Jiu-Jitsu</h3>
-                            <p class="text-gray-300 text-sm mb-4">Arte brasilero - Gi &amp; No-Gi</p>
+                            <h3 class="font-display text-xl font-bold text-white mb-2">Jiu-Jitsu Brasileño (BJJ)</h3>
+                            <p class="text-gray-300 text-sm mb-4">Grappling, suelo y sumisiones — Gi &amp; No-Gi</p>
                         </div>
                         <div class="mt-4 pt-3 border-t border-red-900/30">
                             <a href="#contacto" data-select-service="jiujitsu" class="inline-flex items-center justify-center gap-1.5 text-xs font-display uppercase tracking-wider text-red-400 hover:text-white border border-red-900/50 hover:border-red-500 hover:bg-red-900/30 px-4 py-2 rounded transition">
@@ -494,7 +668,7 @@
                                 </svg>
                             </div>
                             <h3 class="font-display text-xl font-bold text-white mb-2">Boxeo</h3>
-                            <p class="text-gray-300 text-sm mb-4">Técnicas de puño</p>
+                            <p class="text-gray-300 text-sm mb-4">Técnica de puño, desplazamientos y striking en Alicante</p>
                         </div>
                         <div class="mt-4 pt-3 border-t border-red-900/30">
                             <a href="#contacto" data-select-service="boxeo" class="inline-flex items-center justify-center gap-1.5 text-xs font-display uppercase tracking-wider text-red-400 hover:text-white border border-red-900/50 hover:border-red-500 hover:bg-red-900/30 px-4 py-2 rounded transition">
@@ -509,7 +683,7 @@
                                 <i class="fas fa-fist-raised red-accent text-2xl" aria-hidden="true"></i>
                             </div>
                             <h3 class="font-display text-xl font-bold text-white mb-2">MMA</h3>
-                            <p class="text-gray-300 text-sm mb-4">Artes marciales mixtas</p>
+                            <p class="text-gray-300 text-sm mb-4">Artes marciales mixtas: golpeo, lucha y suelo en Climent Club</p>
                         </div>
                         <div class="mt-4 pt-3 border-t border-red-900/30">
                             <a href="#contacto" data-select-service="mma" class="inline-flex items-center justify-center gap-1.5 text-xs font-display uppercase tracking-wider text-red-400 hover:text-white border border-red-900/50 hover:border-red-500 hover:bg-red-900/30 px-4 py-2 rounded transition">
@@ -530,16 +704,17 @@
                 <div class="text-center mb-12">
                     <span class="red-accent font-display uppercase tracking-widest text-sm">Acción</span>
                     <h2 class="font-display text-4xl md:text-5xl font-bold text-white mt-2 mb-4">
-                        ENTRENAMIENTO Y <span class="gold-text">COMPETICIÓN</span>
+                        MMA, GRAPPLING Y <span class="gold-text">COMPETICIÓN</span>
                     </h2>
                 </div>
 
                 <div class="max-w-3xl mx-auto">
                     <img src="{% static 'images/adri-competicion.webp' %}"
-                         alt="Adrián Gálvez finalizando sumisión en la lona de Climent Club Alicante - Jiu-Jitsu y Defensa Personal"
+                         alt="Adrián Gálvez finalizando sumisión de Jiu-Jitsu Brasileño y Grappling en Climent Club Alicante"
                          width="1299"
                          height="1295"
                          loading="lazy"
+                         decoding="async"
                          class="w-full h-auto rounded-lg shadow-2xl">
                 </div>
             </div>
@@ -551,9 +726,9 @@
                 <div class="text-center mb-16">
                     <span class="red-accent font-display uppercase tracking-widest text-sm">Galería</span>
                     <h2 class="font-display text-4xl md:text-5xl font-bold text-white mt-2 mb-4">
-                        MOMENTOS EN <span class="red-accent">EL RING</span>
+                        MOMENTOS DE <span class="red-accent">MMA, BOXEO Y JIU-JITSU</span>
                     </h2>
-                    <p class="text-gray-300">Entrenamientos, combates y más</p>
+                    <p class="text-gray-300">Entrenamientos en Climent Club Alicante, combates y preparación física</p>
                 </div>
 
                 <!-- Gallery Tabs -->
@@ -584,7 +759,7 @@
                         {% for item in photos|slice:":4" %}
                         {% if item.image %}
                         <a href="{{ item.image.url }}" class="glightbox gallery-item group relative block overflow-hidden rounded-lg aspect-square cursor-pointer transition" data-gallery="gallery-fotos" data-title="{{ item.title }}" data-description="{{ item.description }}">
-                            <img src="{{ item.image.url }}" alt="{{ item.title }}" loading="lazy" class="w-full h-full object-cover">
+                            <img src="{{ item.image.url }}" alt="{{ item.title }} - Adrián Gálvez MMA, Jiu-Jitsu y Boxeo en Climent Club Alicante" loading="lazy" decoding="async" class="w-full h-full object-cover">
                             <div class="absolute inset-0 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition duration-300 flex items-center justify-center z-20 p-4">
                                 <p class="text-white font-display text-base sm:text-lg tracking-wider uppercase text-center">{{ item.title }}</p>
                             </div>
@@ -603,7 +778,7 @@
                         {% for item in photos|slice:"4:" %}
                         {% if item.image %}
                         <a href="{{ item.image.url }}" class="glightbox gallery-item group relative block overflow-hidden rounded-lg aspect-square cursor-pointer transition" data-gallery="gallery-fotos" data-title="{{ item.title }}" data-description="{{ item.description }}">
-                            <img src="{{ item.image.url }}" alt="{{ item.title }}" loading="lazy" class="w-full h-full object-cover">
+                            <img src="{{ item.image.url }}" alt="{{ item.title }} - Adrián Gálvez MMA, Jiu-Jitsu y Boxeo en Climent Club Alicante" loading="lazy" decoding="async" class="w-full h-full object-cover">
                             <div class="absolute inset-0 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition duration-300 flex items-center justify-center z-20 p-4">
                                 <p class="text-white font-display text-base sm:text-lg tracking-wider uppercase text-center">{{ item.title }}</p>
                             </div>
@@ -631,7 +806,7 @@
                     {% if item.video_url or item.video_file %}
                     <a href="{% if item.video_url %}{{ item.video_url }}{% else %}{{ item.video_file.url }}{% endif %}" class="glightbox-video gallery-item group relative block overflow-hidden rounded-lg aspect-video cursor-pointer transition" data-gallery="gallery-videos" data-title="{{ item.title }}" data-description="{{ item.description }}">
                         {% if item.image %}
-                        <img src="{{ item.image.url }}" alt="{{ item.title }}" loading="lazy" class="w-full h-full object-cover">
+                        <img src="{{ item.image.url }}" alt="{{ item.title }} - Vídeo de MMA y Jiu-Jitsu en Climent Club Alicante" loading="lazy" decoding="async" class="w-full h-full object-cover">
                         {% else %}
                         <div class="w-full h-full bg-gray-900 flex items-center justify-center">
                             <i class="fas fa-video text-gray-500 text-4xl" aria-hidden="true"></i>
@@ -658,6 +833,81 @@
             </div>
         </section>
 
+        <!-- FAQ Section -->
+        <section id="preguntas-frecuentes" class="py-24 bg-butcher-dark border-t border-red-900/20">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <span class="red-accent font-display uppercase tracking-widest text-sm">Información Clave</span>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-white mt-2 mb-4">
+                        PREGUNTAS <span class="gold-text">FRECUENTES</span>
+                    </h2>
+                    <p class="text-gray-300 max-w-2xl mx-auto">
+                        Resuelve tus dudas sobre MMA, Jiu-Jitsu Brasileño (BJJ), Boxeo, Defensa Personal y entrenamiento en Climent Club Alicante.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <details class="bg-gray-900/60 border border-red-900/30 rounded-lg p-6">
+                        <summary class="font-display text-lg text-white cursor-pointer flex items-center justify-between gap-4">
+                            <span>¿Dónde se realizan los entrenamientos de MMA, Jiu-Jitsu y Boxeo en Alicante?</span>
+                            <i class="fas fa-chevron-down red-accent text-sm shrink-0" aria-hidden="true"></i>
+                        </summary>
+                        <p class="text-gray-300 text-sm leading-relaxed mt-4 pt-4 border-t border-red-900/20">
+                            {% if private_classes_enabled %}
+                            Las clases particulares y entrenamientos con Adrián Gálvez se realizan en <strong class="text-white font-medium">Climent Club Alicante</strong> (C. Burgos, 8, 03015 Alicante), el gimnasio de referencia internacional en MMA, Jiu-Jitsu Brasileño (BJJ), Boxeo y Defensa Personal fundado por los hermanos Jorge y Agustín Climent.
+                            {% else %}
+                            Adrián Gálvez entrena diariamente en <strong class="text-white font-medium">Climent Club Alicante</strong> (C. Burgos, 8, 03015 Alicante), el gimnasio de referencia internacional en MMA, Jiu-Jitsu Brasileño (BJJ), Boxeo y Defensa Personal fundado por los hermanos Jorge y Agustín Climent.
+                            {% endif %}
+                        </p>
+                    </details>
+
+                    <details class="bg-gray-900/60 border border-red-900/30 rounded-lg p-6">
+                        <summary class="font-display text-lg text-white cursor-pointer flex items-center justify-between gap-4">
+                            <span>¿Qué disciplinas de artes marciales y deportes de contacto se trabajan?</span>
+                            <i class="fas fa-chevron-down red-accent text-sm shrink-0" aria-hidden="true"></i>
+                        </summary>
+                        <p class="text-gray-300 text-sm leading-relaxed mt-4 pt-4 border-t border-red-900/20">
+                            Se trabajan cuatro pilares principales: <strong class="text-white font-medium">MMA (Artes Marciales Mixtas)</strong>, <strong class="text-white font-medium">Jiu-Jitsu Brasileño (BJJ en modalidades Gi y No-Gi / Grappling)</strong>, <strong class="text-white font-medium">Boxeo y striking técnico</strong>, y <strong class="text-white font-medium">Defensa Personal práctica</strong> aplicada a situaciones reales.
+                        </p>
+                    </details>
+
+                    <details class="bg-gray-900/60 border border-red-900/30 rounded-lg p-6">
+                        <summary class="font-display text-lg text-white cursor-pointer flex items-center justify-between gap-4">
+                            <span>¿Necesito experiencia previa para empezar MMA, Boxeo o Defensa Personal en Alicante?</span>
+                            <i class="fas fa-chevron-down red-accent text-sm shrink-0" aria-hidden="true"></i>
+                        </summary>
+                        <p class="text-gray-300 text-sm leading-relaxed mt-4 pt-4 border-t border-red-900/20">
+                            No es necesaria experiencia previa. El entrenamiento se adapta progresivamente tanto a principiantes que buscan ponerse en forma o aprender defensa personal desde cero como a deportistas amateur y profesionales que preparan competición.
+                        </p>
+                    </details>
+
+                    <details class="bg-gray-900/60 border border-red-900/30 rounded-lg p-6">
+                        <summary class="font-display text-lg text-white cursor-pointer flex items-center justify-between gap-4">
+                            <span>¿Qué diferencia hay entre MMA, Jiu-Jitsu Brasileño (BJJ) y Boxeo?</span>
+                            <i class="fas fa-chevron-down red-accent text-sm shrink-0" aria-hidden="true"></i>
+                        </summary>
+                        <p class="text-gray-300 text-sm leading-relaxed mt-4 pt-4 border-t border-red-900/20">
+                            El <strong class="text-white font-medium">Boxeo</strong> se centra en la técnica de puño, desplazamientos y defensa en pie; el <strong class="text-white font-medium">Jiu-Jitsu Brasileño (BJJ)</strong> domina la lucha en el suelo, el control posicional y las sumisiones; y el <strong class="text-white font-medium">MMA</strong> combina el striking, la lucha y el grappling en un combate integral.
+                        </p>
+                    </details>
+
+                    <details class="bg-gray-900/60 border border-red-900/30 rounded-lg p-6">
+                        <summary class="font-display text-lg text-white cursor-pointer flex items-center justify-between gap-4">
+                            <span>¿Cómo puedo contactar con Adrián Gálvez en Climent Club Alicante?</span>
+                            <i class="fas fa-chevron-down red-accent text-sm shrink-0" aria-hidden="true"></i>
+                        </summary>
+                        <p class="text-gray-300 text-sm leading-relaxed mt-4 pt-4 border-t border-red-900/20">
+                            {% if private_classes_enabled %}
+                            Puedes solicitar información y reservar tu entrenamiento de MMA, Jiu-Jitsu, Boxeo o Defensa Personal directamente desde el <a href="#contacto" class="red-accent hover:text-white transition">formulario de contacto</a> o escribiendo por Instagram a @{{ social_networks.0.username|default:'adrigalvez17' }}.
+                            {% else %}
+                            Puedes enviar tu consulta, propuesta de colaboración o mensaje directamente desde el <a href="#contacto" class="red-accent hover:text-white transition">formulario de contacto</a> o a través de Instagram en @{{ social_networks.0.username|default:'adrigalvez17' }}.
+                            {% endif %}
+                        </p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
         <!-- Contact Section -->
         <section id="contacto" class="py-24 sm:py-32 overlay">
             <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -669,10 +919,9 @@
                         </h2>
                         <p class="text-gray-300 text-lg mb-8">
                             {% if private_classes_enabled %}
-                            ¿Listo para entrenar? Reserva tu clase particular y comienza tu camino hacia la maestría
-                            marcial.
+                            ¿Listo para entrenar MMA, Jiu-Jitsu Brasileño, Boxeo o Defensa Personal en Alicante? Reserva tu clase particular en Climent Club y da el siguiente paso.
                             {% else %}
-                            ¿Tienes alguna consulta o propuesta? Ponte en contacto directamente a través del formulario.
+                            ¿Tienes alguna consulta o propuesta relacionada con MMA, Jiu-Jitsu, Boxeo o Climent Club Alicante? Ponte en contacto directamente a través del formulario.
                             {% endif %}
                         </p>
 
@@ -685,8 +934,8 @@
                                     </div>
                                     <div>
                                         <span class="text-xs font-display uppercase tracking-widest red-accent block mb-0.5">Lugar de Entrenamiento</span>
-                                        <h3 class="text-white font-bold text-base sm:text-lg leading-tight">Climent Club</h3>
-                                        <p class="text-gray-300 text-xs sm:text-sm mt-0.5">C. Burgos, 8, 03015 Alicante</p>
+                                        <h3 class="text-white font-bold text-base sm:text-lg leading-tight">Climent Club Alicante</h3>
+                                        <address class="not-italic text-gray-300 text-xs sm:text-sm mt-0.5">C. Burgos, 8, 03015 Alicante</address>
                                     </div>
                                 </div>
 
@@ -700,15 +949,29 @@
                                 </a>
                             </div>
 
-                            <!-- Contenedor del Plano de Google Maps -->
+                            <!-- Contenedor del Plano de Google Maps (bloqueado hasta consentimiento de cookies de terceros) -->
                             <div id="map-container" class="relative w-full h-56 sm:h-64 bg-gray-950 overflow-hidden">
-                                <iframe src="https://maps.google.com/maps?hl=es&amp;q=Climent+Club,+C.+Burgos,+8,+03015+Alicante&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
-                                        class="w-full h-full border-0"
-                                        loading="lazy"
-                                        referrerpolicy="strict-origin-when-cross-origin"
-                                        sandbox="allow-scripts allow-same-origin allow-popups"
-                                        title="Plano de ubicación de Climent Club en Google Maps">
-                                </iframe>
+                                <div id="map-placeholder" class="w-full h-full flex flex-col items-center justify-center text-center p-6 bg-gradient-to-br from-butcher-dark via-gray-900 to-butcher-dark">
+                                    <i class="fas fa-map-marked-alt red-accent text-3xl mb-3" aria-hidden="true"></i>
+                                    <p class="text-white font-display text-base uppercase tracking-wider mb-1">
+                                        Mapa de Google Maps bloqueado por privacidad
+                                    </p>
+                                    <p class="text-gray-300 text-xs max-w-md mb-4 leading-relaxed">
+                                        Al cargar el mapa interactivo, Google LLC puede instalar cookies de terceros. Puedes activarlo ahora o gestionarlo desde la configuración de cookies.
+                                    </p>
+                                    <div class="flex flex-wrap justify-center gap-2.5">
+                                        <button type="button"
+                                                id="map-load-btn"
+                                                class="px-4 py-2 min-h-[40px] rounded btn-primary text-white font-display text-xs uppercase tracking-wider cursor-pointer">
+                                            Aceptar y cargar mapa
+                                        </button>
+                                        <button type="button"
+                                                data-open-cookie-settings
+                                                class="px-4 py-2 min-h-[40px] rounded border border-gray-500 text-gray-200 hover:border-white hover:text-white font-display text-xs uppercase tracking-wider transition cursor-pointer">
+                                            Configurar cookies
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -744,7 +1007,8 @@
                 <div class="text-center md:text-left">
                     <p class="font-display text-2xl font-bold text-white">ADRIÁN <span class="red-accent">GÁLVEZ</span>
                     </p>
-                    <p class="text-gray-400 text-sm">"{{ fighter.nickname|default:'The Butcher' }}" | Entrenador Profesional</p>
+                    <p class="text-gray-400 text-sm">"{{ fighter.nickname|default:'The Butcher' }}" | {% if private_classes_enabled %}MMA, Jiu-Jitsu, Boxeo y Defensa Personal en Alicante{% else %}Luchador Profesional de MMA y BJJ · Climent Club Alicante{% endif %}</p>
+                    <p class="text-gray-400 text-xs mt-1">Climent Club · C. Burgos, 8, 03015 Alicante</p>
                 </div>
 
                 <nav aria-label="Navegación secundaria">
@@ -756,16 +1020,33 @@
                         <li><a href="#servicios" class="text-gray-300 hover:text-white transition text-sm py-1">Servicios</a></li>
                         {% endif %}
                         <li><a href="#galeria" class="text-gray-300 hover:text-white transition text-sm py-1">Galería</a></li>
+                        <li><a href="#preguntas-frecuentes" class="text-gray-300 hover:text-white transition text-sm py-1">FAQ</a></li>
                         <li><a href="#contacto" class="text-gray-300 hover:text-white transition text-sm py-1">Contacto</a></li>
                     </ul>
                 </nav>
             </div>
 
-            <div class="border-t border-red-900/20 mt-8 pt-8 text-center">
+            <div class="border-t border-red-900/20 mt-8 pt-8 text-center space-y-4">
+                <nav aria-label="Enlaces legales">
+                    <ul class="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-xs sm:text-sm">
+                        <li><a href="{% url 'core:legal_notice' %}" class="text-gray-300 hover:text-white transition py-1">Aviso Legal</a></li>
+                        <li><a href="{% url 'core:privacy_policy' %}" class="text-gray-300 hover:text-white transition py-1">Política de Privacidad</a></li>
+                        <li><a href="{% url 'core:cookie_policy' %}" class="text-gray-300 hover:text-white transition py-1">Política de Cookies</a></li>
+                        <li>
+                            <button type="button"
+                                    data-open-cookie-settings
+                                    class="text-gray-300 hover:text-white underline underline-offset-4 transition py-1 cursor-pointer">
+                                Configurar cookies
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
                 <p class="text-gray-400 text-sm">&copy; {% now "Y" %} Adrián Gálvez. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
+
+    {% include 'core/partials/cookie_banner.html' %}
 
 </body>
 

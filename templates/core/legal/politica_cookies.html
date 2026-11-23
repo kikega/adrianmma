@@ -1,0 +1,118 @@
+{% extends 'core/legal/base_legal.html' %}
+
+{% block title %}Política de Cookies | Adrián Gálvez{% endblock %}
+{% block meta_description %}Política de cookies de Adrián Gálvez conforme al artículo 22.2 de la LSSI-CE, RGPD, LOPDGDD y Guía de Cookies de la AEPD.{% endblock %}
+{% block legal_kicker %}Art. 22.2 LSSI-CE · Guía AEPD · RGPD{% endblock %}
+{% block legal_heading %}POLÍTICA DE <span class="gold-text">COOKIES</span>{% endblock %}
+
+{% block legal_content %}
+<section class="space-y-3">
+    <h2 class="font-display text-xl sm:text-2xl font-bold text-white uppercase tracking-wide">
+        1. ¿Qué son las cookies?
+    </h2>
+    <p>
+        Las cookies y tecnologías similares de almacenamiento local son pequeños archivos que se guardan en tu navegador al visitar un sitio web. Sirven para garantizar el funcionamiento técnico y la seguridad de la página, recordar tus preferencias o, en otros sitios web, analizar el tráfico o mostrar publicidad.
+    </p>
+</section>
+
+<section class="space-y-3">
+    <h2 class="font-display text-xl sm:text-2xl font-bold text-white uppercase tracking-wide">
+        2. Transparencia sobre tracking comercial o de usuario
+    </h2>
+    <div class="p-4 rounded-lg bg-red-950/30 border border-red-900/50 text-gray-200 space-y-2">
+        <p class="font-medium text-white">Sin cookies propias de analítica ni tracking comercial</p>
+        <p class="text-sm leading-relaxed">
+            Este sitio web <strong class="text-white">no utiliza cookies propias de analítica (como Google Analytics), píxeles publicitarios ni herramientas de tracking comercial o perfilado de usuarios</strong>.
+            El único contenido externo potencialmente generador de cookies de terceros es el mapa embebido de <strong class="text-white">Google Maps</strong>, que permanece <strong class="text-white">bloqueado por defecto</strong> hasta que decidas activarlo y puedes desactivarlo en cualquier momento desde el panel de configuración.
+        </p>
+    </div>
+</section>
+
+<section class="space-y-4">
+    <h2 class="font-display text-xl sm:text-2xl font-bold text-white uppercase tracking-wide">
+        3. Detalle de cookies utilizadas y motivo de su uso
+    </h2>
+
+    <div class="overflow-x-auto rounded-lg border border-white/10">
+        <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+                <tr class="bg-butcher-dark/90 border-b border-red-900/40 text-white font-display uppercase tracking-wider">
+                    <th scope="col" class="py-3 px-4">Nombre</th>
+                    <th scope="col" class="py-3 px-4">Titular / Tipo</th>
+                    <th scope="col" class="py-3 px-4">Categoría</th>
+                    <th scope="col" class="py-3 px-4">Motivo / Finalidad</th>
+                    <th scope="col" class="py-3 px-4">Duración</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-white/10 bg-gray-900/40">
+                <tr>
+                    <td class="py-3 px-4 font-mono text-white">csrftoken</td>
+                    <td class="py-3 px-4">Propia (Django)</td>
+                    <td class="py-3 px-4"><span class="text-red-300 font-medium">Técnica necesaria</span></td>
+                    <td class="py-3 px-4">Proteger el formulario de contacto frente a ataques de falsificación de petición en sitios cruzados (CSRF). Exenta de consentimiento (art. 22.2 LSSI-CE).</td>
+                    <td class="py-3 px-4">Hasta 1 año</td>
+                </tr>
+                <tr>
+                    <td class="py-3 px-4 font-mono text-white">adrigalvez_cookie_prefs</td>
+                    <td class="py-3 px-4">Propia (Cookie y localStorage)</td>
+                    <td class="py-3 px-4"><span class="text-red-300 font-medium">Técnica necesaria</span></td>
+                    <td class="py-3 px-4">Recordar tu decisión de aceptación, rechazo o configuración de cookies para no volver a mostrar el aviso en cada visita.</td>
+                    <td class="py-3 px-4">12 meses</td>
+                </tr>
+                <tr>
+                    <td class="py-3 px-4 font-mono text-white">sessionid</td>
+                    <td class="py-3 px-4">Propia (Django)</td>
+                    <td class="py-3 px-4"><span class="text-red-300 font-medium">Técnica (solo admin)</span></td>
+                    <td class="py-3 px-4">Mantiene la sesión únicamente si el titular accede al panel privado de administración. No se instala a visitantes públicos.</td>
+                    <td class="py-3 px-4">Sesión / 14 días</td>
+                </tr>
+                <tr>
+                    <td class="py-3 px-4 font-mono text-white">NID, CONSENT, SOCS (y similares)</td>
+                    <td class="py-3 px-4">Terceros (Google LLC — maps.google.com)</td>
+                    <td class="py-3 px-4"><span class="text-yellow-300 font-medium">Opcional / Bloqueable</span></td>
+                    <td class="py-3 px-4">Solo se instalan si activas voluntariamente el mapa interactivo embebido de Google Maps. Google puede emplearlas para recordar preferencias del mapa o fines propios de Google LLC.</td>
+                    <td class="py-3 px-4">Según política de Google LLC (hasta 24 meses)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="space-y-4">
+    <h2 class="font-display text-xl sm:text-2xl font-bold text-white uppercase tracking-wide">
+        4. Cómo bloquear, desactivar o revocar el consentimiento
+    </h2>
+    <p>
+        Puedes modificar tus preferencias o retirar tu consentimiento en cualquier momento con un solo clic, bloqueando inmediatamente la carga del mapa de terceros y cualquier categoría opcional:
+    </p>
+    <div>
+        <button type="button"
+                data-open-cookie-settings
+                class="btn-primary px-6 py-3 rounded text-white font-display text-sm uppercase tracking-wider inline-flex items-center gap-2 cursor-pointer">
+            <i class="fas fa-sliders-h" aria-hidden="true"></i>
+            <span>Abrir panel de configuración de cookies</span>
+        </button>
+    </div>
+    <p>
+        Además, puedes restringir, bloquear o eliminar las cookies almacenadas en tu dispositivo a través de la configuración de tu navegador:
+    </p>
+    <ul class="list-disc pl-6 space-y-1.5">
+        <li><a href="https://support.google.com/chrome/answer/95647?hl=es" target="_blank" rel="noopener noreferrer" class="red-accent underline hover:text-white transition">Google Chrome</a></li>
+        <li><a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias" target="_blank" rel="noopener noreferrer" class="red-accent underline hover:text-white transition">Mozilla Firefox</a></li>
+        <li><a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener noreferrer" class="red-accent underline hover:text-white transition">Apple Safari</a></li>
+        <li><a href="https://support.microsoft.com/es-es/microsoft-edge/eliminar-las-cookies-en-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener noreferrer" class="red-accent underline hover:text-white transition">Microsoft Edge</a></li>
+    </ul>
+</section>
+
+<section class="space-y-3">
+    <h2 class="font-display text-xl sm:text-2xl font-bold text-white uppercase tracking-wide">
+        5. Más información
+    </h2>
+    <p>
+        Para más información sobre el tratamiento de datos y tus derechos, consulta nuestra
+        <a href="{% url 'core:privacy_policy' %}" class="red-accent underline hover:text-white transition">Política de Privacidad</a>
+        y nuestro
+        <a href="{% url 'core:legal_notice' %}" class="red-accent underline hover:text-white transition">Aviso Legal</a>.
+    </p>
+</section>
+{% endblock %}

@@ -242,11 +242,81 @@
         });
     }
 
-    // 6. Privacy-friendly interactive Google Maps loader
-    const mapLoadBtn = document.getElementById('map-load-btn');
+    // 6. Cookie Consent Manager (LSSI-CE / RGPD / AEPD) & Privacy-Friendly Google Maps
+    const COOKIE_PREFS_KEY = 'adrigalvez_cookie_prefs';
+    const COOKIE_PREFS_VERSION = 1;
+    const COOKIE_MAX_AGE_SECONDS = 31536000; // 12 meses
+
+    const cookieBanner = document.getElementById('cookie-banner');
+    const cookieDialog = document.getElementById('cookie-settings-dialog');
+    const toggleMaps = document.getElementById('cookie-toggle-maps');
+    const toggleMarketing = document.getElementById('cookie-toggle-marketing');
     const mapContainer = document.getElementById('map-container');
-    if (mapLoadBtn && mapContainer) {
-        mapLoadBtn.addEventListener('click', () => {
+    const initialMapPlaceholder = mapContainer ? mapContainer.innerHTML : '';
+
+    function readCookiePrefsFromDocumentCookie() {
+        try {
+            const match = document.cookie
+                .split('; ')
+                .find((row) => row.startsWith(COOKIE_PREFS_KEY + '='));
+            if (!match) return null;
+            const raw = decodeURIComponent(match.slice(COOKIE_PREFS_KEY.length + 1));
+            const parsed = JSON.parse(raw);
+            if (parsed && parsed.version === COOKIE_PREFS_VERSION) {
+                return parsed;
+            }
+        } catch (_) {
+            return null;
+        }
+        return null;
+    }
+
+    function loadCookiePrefs() {
+        try {
+            const raw = window.localStorage.getItem(COOKIE_PREFS_KEY);
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                if (parsed && parsed.version === COOKIE_PREFS_VERSION) {
+                    return parsed;
+                }
+            }
+        } catch (_) {
+            // Ignora errores de almacenamiento restringido y prueba con cookie técnica
+        }
+        return readCookiePrefsFromDocumentCookie();
+    }
+
+    function saveCookiePrefs(mapsAllowed, marketingAllowed) {
+        const prefs = {
+            version: COOKIE_PREFS_VERSION,
+            necessary: true,
+            maps: Boolean(mapsAllowed),
+            marketing: Boolean(marketingAllowed),
+            updatedAt: new Date().toISOString(),
+        };
+        const serialized = JSON.stringify(prefs);
+        try {
+            window.localStorage.setItem(COOKIE_PREFS_KEY, serialized);
+        } catch (_) {
+            // Fallback en cookie técnica
+        }
+        const secureAttr = window.location.protocol === 'https:' ? '; Secure' : '';
+        document.cookie =
+            COOKIE_PREFS_KEY +
+            '=' +
+            encodeURIComponent(serialized) +
+            '; Path=/; Max-Age=' +
+            COOKIE_MAX_AGE_SECONDS +
+            '; SameSite=Lax' +
+            secureAttr;
+        return prefs;
+    }
+
+    function renderGoogleMap(allowed, focusIframe) {
+        if (!mapContainer) return;
+        const existingIframe = mapContainer.querySelector('iframe');
+        if (allowed) {
+            if (existingIframe) return;
             const iframe = document.createElement('iframe');
             iframe.src =
                 'https://maps.google.com/maps?hl=es&q=Climent+Club,+C.+Burgos,+8,+03015+Alicante&t=&z=16&ie=UTF8&iwloc=&output=embed';
@@ -256,9 +326,145 @@
             iframe.referrerPolicy = 'strict-origin-when-cross-origin';
             iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups');
             mapContainer.replaceChildren(iframe);
-            iframe.focus();
+            if (focusIframe) {
+                iframe.focus();
+            }
+        } else if (existingIframe && initialMapPlaceholder) {
+            mapContainer.innerHTML = initialMapPlaceholder;
+        }
+    }
+
+    function syncCookieDialogControls(prefs) {
+        if (toggleMaps) {
+            toggleMaps.checked = Boolean(prefs && prefs.maps);
+        }
+        if (toggleMarketing) {
+            toggleMarketing.checked = Boolean(prefs && prefs.marketing);
+        }
+    }
+
+    function applyCookiePrefs(prefs, focusMap) {
+        if (cookieBanner) {
+            cookieBanner.hidden = true;
+        }
+        syncCookieDialogControls(prefs);
+        renderGoogleMap(Boolean(prefs && prefs.maps), focusMap);
+    }
+
+    function openCookieSettings() {
+        if (!cookieDialog) return;
+        syncCookieDialogControls(loadCookiePrefs());
+        if (typeof cookieDialog.showModal === 'function') {
+            if (!cookieDialog.open) {
+                cookieDialog.showModal();
+            }
+        } else {
+            cookieDialog.setAttribute('open', '');
+        }
+    }
+
+    function closeCookieSettings() {
+        if (!cookieDialog) return;
+        if (typeof cookieDialog.close === 'function' && cookieDialog.open) {
+            cookieDialog.close();
+        } else {
+            cookieDialog.removeAttribute('open');
+        }
+    }
+
+    const savedCookiePrefs = loadCookiePrefs();
+    if (savedCookiePrefs) {
+        applyCookiePrefs(savedCookiePrefs, false);
+    } else if (cookieBanner) {
+        cookieBanner.hidden = false;
+    }
+
+    const btnBannerAccept = document.getElementById('cookie-btn-accept');
+    const btnBannerReject = document.getElementById('cookie-btn-reject');
+    const btnBannerCustomize = document.getElementById('cookie-btn-customize');
+    const btnDialogClose = document.getElementById('cookie-dialog-close');
+    const btnDialogReject = document.getElementById('cookie-dialog-reject');
+    const btnDialogSave = document.getElementById('cookie-dialog-save');
+    const btnDialogAccept = document.getElementById('cookie-dialog-accept');
+
+    if (btnBannerAccept) {
+        btnBannerAccept.addEventListener('click', () => {
+            applyCookiePrefs(saveCookiePrefs(true, true), false);
         });
     }
+    if (btnBannerReject) {
+        btnBannerReject.addEventListener('click', () => {
+            applyCookiePrefs(saveCookiePrefs(false, false), false);
+        });
+    }
+    if (btnBannerCustomize) {
+        btnBannerCustomize.addEventListener('click', openCookieSettings);
+    }
+    if (btnDialogClose) {
+        btnDialogClose.addEventListener('click', closeCookieSettings);
+    }
+    if (btnDialogReject) {
+        btnDialogReject.addEventListener('click', () => {
+            applyCookiePrefs(saveCookiePrefs(false, false), false);
+            closeCookieSettings();
+        });
+    }
+    if (btnDialogSave) {
+        btnDialogSave.addEventListener('click', () => {
+            const mapsChecked = Boolean(toggleMaps && toggleMaps.checked);
+            const marketingChecked = Boolean(toggleMarketing && toggleMarketing.checked);
+            applyCookiePrefs(saveCookiePrefs(mapsChecked, marketingChecked), false);
+            closeCookieSettings();
+        });
+    }
+    if (btnDialogAccept) {
+        btnDialogAccept.addEventListener('click', () => {
+            applyCookiePrefs(saveCookiePrefs(true, true), false);
+            closeCookieSettings();
+        });
+    }
+
+    if (cookieDialog) {
+        cookieDialog.addEventListener('close', () => {
+            cookieDialog.returnValue = '';
+        });
+
+        // Fallback obligatorio para light-dismiss en navegadores sin soporte de <dialog closedby="any">
+        if (!('closedBy' in HTMLDialogElement.prototype)) {
+            const isOutsideDialog = (evt, dialog) => {
+                const rect = dialog.getBoundingClientRect();
+                return (
+                    evt.clientX < rect.left ||
+                    evt.clientX > rect.right ||
+                    evt.clientY < rect.top ||
+                    evt.clientY > rect.bottom
+                );
+            };
+            let pressedOutside = false;
+            cookieDialog.addEventListener('pointerdown', (evt) => {
+                pressedOutside = isOutsideDialog(evt, cookieDialog);
+            });
+            cookieDialog.addEventListener('pointerup', (evt) => {
+                if (pressedOutside && isOutsideDialog(evt, cookieDialog)) {
+                    closeCookieSettings();
+                }
+                pressedOutside = false;
+            });
+        }
+    }
+
+    // Delegación para botones de abrir configuración de cookies y cargar Google Maps
+    document.addEventListener('click', (evt) => {
+        if (evt.target.closest('[data-open-cookie-settings]')) {
+            openCookieSettings();
+            return;
+        }
+        if (evt.target.closest('#map-load-btn')) {
+            const current = loadCookiePrefs();
+            const marketingPref = Boolean(current && current.marketing);
+            applyCookiePrefs(saveCookiePrefs(true, marketingPref), true);
+        }
+    });
 
     // 7. GLightbox initialization (with sanitized titles/descriptions) & missing image fallback
     document.addEventListener(
@@ -365,12 +571,14 @@
         }
     });
 
-    // 9. Clear field error indicators on user input (non-intrusive UX)
-    document.body.addEventListener('input', (evt) => {
+    // 9. Clear field error indicators on user input/change (non-intrusive UX)
+    function clearValidityIndicator(evt) {
         const field = evt.target;
         if (!field || !field.closest('#contact-form-container')) return;
         if (field.getAttribute('aria-invalid') === 'true' && field.checkValidity()) {
             field.removeAttribute('aria-invalid');
         }
-    });
+    }
+    document.body.addEventListener('input', clearValidityIndicator);
+    document.body.addEventListener('change', clearValidityIndicator);
 })();

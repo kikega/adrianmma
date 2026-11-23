@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Información Legal | Adrián Gálvez{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Información legal, privacidad y política de cookies de la web personal de Adrián Gálvez.{% endblock %}">
+    <meta name="robots" content="noindex, follow">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/output.css' %}?v=20261123-2">
+
+    <script src="{% static 'js/main.js' %}?v=20261123-2" nonce="{{ csp_nonce }}" defer></script>
+</head>
+
+<body class="pattern-bg min-h-screen flex flex-col">
+
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+    <header>
+        <nav id="navbar" aria-label="Navegación principal" class="fixed top-0 w-full z-50 transition-all duration-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-20 gap-4">
+                    <a href="{% url 'core:landing' %}" class="flex items-center flex-wrap gap-x-2 min-w-0 rounded py-1">
+                        <span class="font-display text-xl sm:text-2xl font-bold text-white tracking-wider whitespace-nowrap">
+                            ADRIÁN <span class="red-accent">GÁLVEZ</span>
+                        </span>
+                        <span class="text-[11px] sm:text-xs red-accent font-display uppercase tracking-[0.2em] sm:tracking-[0.3em] whitespace-nowrap">"{{ fighter.nickname|default:'The Butcher' }}"</span>
+                    </a>
+
+                    <a href="{% url 'core:landing' %}"
+                       class="inline-flex items-center gap-2 text-sm font-display uppercase tracking-wider text-gray-200 hover:text-white border border-red-900/50 hover:border-red-500 px-4 py-2 rounded transition">
+                        <i class="fas fa-arrow-left text-xs" aria-hidden="true"></i>
+                        <span>Volver al inicio</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content" tabindex="-1" class="flex-1 pt-32 pb-20">
+        <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gray-900/70 border border-red-900/30 rounded-xl p-6 sm:p-10 shadow-2xl space-y-8">
+                <header class="border-b border-red-900/30 pb-6">
+                    <span class="red-accent font-display uppercase tracking-widest text-xs sm:text-sm block mb-2">
+                        {% block legal_kicker %}Cumplimiento LSSI-CE · RGPD · LOPDGDD{% endblock %}
+                    </span>
+                    <h1 class="font-display text-3xl sm:text-5xl font-bold text-white tracking-tight">
+                        {% block legal_heading %}{% endblock %}
+                    </h1>
+                    <p class="text-gray-400 text-xs sm:text-sm mt-3">
+                        Última actualización: {% now "d/m/Y" %}
+                    </p>
+                </header>
+
+                <div class="space-y-6 text-gray-300 text-sm sm:text-base leading-relaxed">
+                    {% block legal_content %}{% endblock %}
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="py-10 border-t border-red-900/20 bg-butcher-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+            <nav aria-label="Enlaces legales">
+                <ul class="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-xs sm:text-sm">
+                    <li><a href="{% url 'core:legal_notice' %}" class="text-gray-300 hover:text-white transition py-1">Aviso Legal</a></li>
+                    <li><a href="{% url 'core:privacy_policy' %}" class="text-gray-300 hover:text-white transition py-1">Política de Privacidad</a></li>
+                    <li><a href="{% url 'core:cookie_policy' %}" class="text-gray-300 hover:text-white transition py-1">Política de Cookies</a></li>
+                    <li>
+                        <button type="button"
+                                data-open-cookie-settings
+                                class="text-gray-300 hover:text-white underline underline-offset-4 transition py-1 cursor-pointer">
+                            Configurar cookies
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+            <p class="text-gray-400 text-xs sm:text-sm">&copy; {% now "Y" %} Adrián Gálvez. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    {% include 'core/partials/cookie_banner.html' %}
+</body>
+
+</html>

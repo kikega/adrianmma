@@ -1,3 +1,5 @@
+import json
+import re
 import tempfile
 import shutil
 from django.test import TestCase, Client, override_settings
@@ -98,6 +100,7 @@ class CoreViewsAndFormsTestCase(TestCase):
             'phone': '+34 611 222 333',
             'service_type': 'mma',
             'message': 'Quiero información sobre clases particulares de MMA.',
+            'privacy_consent': 'on',
             'website': '',  # Honeypot vacío
         }
         response = self.client.post(
@@ -197,6 +200,7 @@ class CoreViewsAndFormsTestCase(TestCase):
             'phone': '',
             'service_type': 'boxeo',
             'message': 'Consulta sin JavaScript.',
+            'privacy_consent': 'on',
             'website': '',
         }
         response = self.client.post(
@@ -227,6 +231,7 @@ class CoreViewsAndFormsTestCase(TestCase):
             'name': 'Usuario Repetido',
             'email': 'repetido@example.com',
             'message': 'Mensaje de prueba',
+            'privacy_consent': 'on',
             'website': '',
         }
         for _ in range(5):
@@ -306,6 +311,7 @@ class CoreViewsAndFormsTestCase(TestCase):
             'phone': '',
             'service_type': 'mma',
             'message': 'Consulta general de colaboración.',
+            'privacy_consent': 'on',
             'website': '',
         }
         response = self.client.post(
@@ -318,6 +324,81 @@ class CoreViewsAndFormsTestCase(TestCase):
         self.assertEqual(saved.service_type, '')
         self.assertEqual(len(mail.outbox), 1)
         self.assertNotIn('Servicio de interés:', mail.outbox[0].body)
+
+    def test_contact_submission_requires_privacy_consent(self):
+        """Verifica que sin marcar el check de consentimiento RGPD se rechace el envío con HTTP 422."""
+        payload = {
+            'name': 'Miguel Ruiz',
+            'email': 'miguel@example.com',
+            'phone': '',
+            'service_type': 'boxeo',
+            'message': 'Quiero consultar horarios.',
+            'website': '',
+        }
+        response = self.client.post(
+            reverse('core:contact'),
+            data=payload,
+            HTTP_HX_REQUEST='true',
+        )
+        self.assertEqual(response.status_code, 422)
+        self.assertContains(
+            response,
+            'Debes aceptar la Política de Privacidad y dar tu consentimiento',
+            status_code=422,
+        )
+        self.assertContains(
+            response,
+            'aria-describedby="contact-privacy-consent-error"',
+            status_code=422,
+        )
+        self.assertFalse(ContactMessage.objects.filter(email='miguel@example.com').exists())
+        self.assertEqual(len(mail.outbox), 0)
+
+    def test_landing_includes_cookie_banner_legal_links_and_blocks_maps_by_default(self):
+        """Verifica banner de cookies, enlaces legales, check de consentimiento y bloqueo inicial de Google Maps."""
+        response = self.client.get(reverse('core:landing'))
+        self.assertEqual(response.status_code, 200)
+        html = response.content.decode('utf-8')
+
+        self.assertIn('id="cookie-banner"', html)
+        self.assertIn('id="cookie-settings-dialog"', html)
+        self.assertIn('closedby="any"', html)
+        self.assertIn('id="cookie-toggle-maps"', html)
+        self.assertIn('id="cookie-toggle-marketing"', html)
+        self.assertIn('id="contact-privacy-consent"', html)
+        self.assertIn(reverse('core:legal_notice'), html)
+        self.assertIn(reverse('core:privacy_policy'), html)
+        self.assertIn(reverse('core:cookie_policy'), html)
+
+        # Google Maps debe permanecer bloqueado hasta el consentimiento del usuario
+        self.assertIn('id="map-placeholder"', html)
+        self.assertIn('id="map-load-btn"', html)
+        self.assertNotIn('<iframe src="https://maps.google.com/', html)
+
+    def test_legal_pages_status_and_compliance_content(self):
+        """Verifica las páginas de Aviso Legal, Política de Privacidad y Política de Cookies."""
+        legal_resp = self.client.get(reverse('core:legal_notice'))
+        self.assertEqual(legal_resp.status_code, 200)
+        self.assertContains(legal_resp, 'LSSI-CE')
+        self.assertContains(legal_resp, 'ausencia de actividad económica')
+        self.assertContains(legal_resp, 'content="noindex, follow"')
+        self.assertIn('Content-Security-Policy', legal_resp.headers)
+
+        privacy_resp = self.client.get(reverse('core:privacy_policy'))
+        self.assertEqual(privacy_resp.status_code, 200)
+        self.assertContains(privacy_resp, 'RGPD')
+        self.assertContains(privacy_resp, 'LOPDGDD')
+        self.assertContains(privacy_resp, 'sin ninguna actividad económica')
+        self.assertContains(privacy_resp, 'no tendrán ningún tratamiento')
+        self.assertContains(privacy_resp, 'Agencia Española de Protección de Datos')
+
+        cookies_resp = self.client.get(reverse('core:cookie_policy'))
+        self.assertEqual(cookies_resp.status_code, 200)
+        self.assertContains(cookies_resp, 'csrftoken')
+        self.assertContains(cookies_resp, 'adrigalvez_cookie_prefs')
+        self.assertContains(cookies_resp, 'Google Maps')
+        self.assertContains(cookies_resp, 'tracking comercial')
+        self.assertContains(cookies_resp, 'data-open-cookie-settings')
 
 
 @override_settings(
@@ -359,4 +440,115 @@ class AdminSubdomainTestCase(TestCase):
             HTTP_HOST='adrianadmin.egalvez.es',
         )
         self.assertEqual(blocked_resp.status_code, 403)
+
+
+@override_settings(MEDIA_ROOT=tempfile.mkdtemp())
+class SEOTestCase(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.fighter = FighterProfile.objects.create(
+            name="Adrián Gálvez",
+            nickname="The Butcher",
+            achievements="Campeón de España Amateur IMAF 2021",
+            location="Alicante - Climent Club",
+            is_active=True,
+        )
+        self.service = Service.objects.create(
+            name="mma",
+            description="Artes marciales mixtas en Climent Club Alicante",
+            price_per_hour=50.00,
+            order=1,
+            is_active=True,
+        )
+        self.social = SocialNetwork.objects.create(
+            platform="instagram",
+            username="adrigalvez17",
+            url="https://instagram.com/adrigalvez17",
+            icon_class="fab fa-instagram",
+            order=1,
+            is_active=True,
+        )
+
+    def _extract_json_ld(self, html: str) -> dict:
+        match = re.search(
+            r'<script type="application/ld\+json">\s*(.*?)\s*</script>',
+            html,
+            re.DOTALL,
+        )
+        self.assertIsNotNone(match, "No se encontró el bloque JSON-LD en la landing")
+        return json.loads(match.group(1))
+
+    @override_settings(PRIVATE_CLASSES_ENABLED=True)
+    def test_landing_seo_meta_tags_and_json_ld_with_classes(self):
+        """Verifica metadatos SEO, canonical, hreflang y JSON-LD completo con clases activas."""
+        response = self.client.get(reverse('core:landing'))
+        self.assertEqual(response.status_code, 200)
+        html = response.content.decode('utf-8')
+
+        self.assertIn('<link rel="canonical" href="https://adrigalvez.com/">', html)
+        self.assertIn('hreflang="es-ES"', html)
+        self.assertIn('max-image-preview:large', html)
+        self.assertIn('geo.position', html)
+        self.assertIn('Climent Club', html)
+        self.assertIn('Jiu-Jitsu', html)
+        self.assertIn('Boxeo', html)
+        self.assertIn('Defensa Personal', html)
+        self.assertIn('id="preguntas-frecuentes"', html)
+
+        data = self._extract_json_ld(html)
+        self.assertIn('@graph', data)
+        types = {node['@type'] for node in data['@graph']}
+        self.assertTrue(
+            {'WebSite', 'ProfilePage', 'Person', 'SportsClub', 'SportsActivityLocation', 'FAQPage'}.issubset(types)
+        )
+
+        business = next(n for n in data['@graph'] if n['@type'] == 'SportsActivityLocation')
+        self.assertIn('hasOfferCatalog', business)
+        offers = business['hasOfferCatalog']['itemListElement']
+        self.assertGreaterEqual(len(offers), 1)
+        mma_offer = next(o for o in offers if 'MMA' in o['itemOffered']['name'])
+        self.assertEqual(mma_offer['price'], '50.00')
+        self.assertEqual(mma_offer['priceCurrency'], 'EUR')
+
+    @override_settings(PRIVATE_CLASSES_ENABLED=False)
+    def test_landing_seo_json_ld_without_classes(self):
+        """Verifica que el JSON-LD sea válido y omita hasOfferCatalog cuando las clases están desactivadas."""
+        response = self.client.get(reverse('core:landing'))
+        self.assertEqual(response.status_code, 200)
+        html = response.content.decode('utf-8')
+
+        data = self._extract_json_ld(html)
+        business = next(n for n in data['@graph'] if n['@type'] == 'SportsActivityLocation')
+        self.assertNotIn('hasOfferCatalog', business)
+
+    def test_robots_txt_and_sitemap_xml(self):
+        """Verifica robots.txt y sitemap.xml con lastmod dinámico e imágenes."""
+        robots = self.client.get('/robots.txt')
+        self.assertEqual(robots.status_code, 200)
+        self.assertIn('text/plain', robots.headers.get('Content-Type', ''))
+        robots_body = robots.content.decode('utf-8')
+        self.assertIn('Disallow: /admin/', robots_body)
+        self.assertIn('Disallow: /galeria/', robots_body)
+        self.assertIn('Disallow: /contacto/', robots_body)
+        self.assertIn('Sitemap: https://adrigalvez.com/sitemap.xml', robots_body)
+
+        sitemap = self.client.get('/sitemap.xml')
+        self.assertEqual(sitemap.status_code, 200)
+        self.assertIn('application/xml', sitemap.headers.get('Content-Type', ''))
+        sitemap_body = sitemap.content.decode('utf-8')
+        self.assertIn('<loc>https://adrigalvez.com/</loc>', sitemap_body)
+        self.assertIn(self.fighter.updated_at.strftime('%Y-%m-%d'), sitemap_body)
+        self.assertIn('xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"', sitemap_body)
+        self.assertIn('equipo-climent.webp', sitemap_body)
+
+    def test_htmx_partials_set_noindex_header(self):
+        """Verifica que los fragmentos HTMX parciales devuelvan X-Robots-Tag: noindex, nofollow."""
+        gallery_resp = self.client.get(reverse('core:gallery'), {'type': 'foto'})
+        self.assertEqual(gallery_resp.status_code, 200)
+        self.assertEqual(gallery_resp.headers.get('X-Robots-Tag'), 'noindex, nofollow')
+
+        form_resp = self.client.get(reverse('core:contact_form'))
+        self.assertEqual(form_resp.status_code, 200)
+        self.assertEqual(form_resp.headers.get('X-Robots-Tag'), 'noindex, nofollow')
+
 

@@ -2,9 +2,11 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpRequest, HttpResponse
 from django.views.decorators.http import require_POST, require_GET
 from django.core.cache import cache
+from django.utils import timezone
 
 from . import services
 from .middleware import get_client_ip
+from .models import FighterProfile, Multimedia
 
 ALLOWED_MEDIA_TYPES = {'foto', 'video'}
 CONTACT_RATE_LIMIT = 5
@@ -28,12 +30,36 @@ def landing(request: HttpRequest) -> HttpResponse:
 
 
 @require_GET
+def sitemap_xml(request: HttpRequest) -> HttpResponse:
+    """
+    Genera sitemap.xml con fecha lastmod dinámica basada en la última
+    actualización del perfil o de la galería multimedia.
+    """
+    candidates = []
+    latest_fighter = FighterProfile.objects.filter(is_active=True).order_by('-updated_at').first()
+    if latest_fighter and latest_fighter.updated_at:
+        candidates.append(latest_fighter.updated_at)
+
+    latest_media = Multimedia.objects.order_by('-created_at').first()
+    if latest_media and latest_media.created_at:
+        candidates.append(latest_media.created_at)
+
+    lastmod_dt = max(candidates) if candidates else timezone.now()
+    context = {
+        'lastmod': lastmod_dt.strftime('%Y-%m-%d'),
+    }
+    return render(request, 'sitemap.xml', context, content_type='application/xml')
+
+
+@require_GET
 def contact_form_view(request: HttpRequest) -> HttpResponse:
     """
     Retorna el fragmento del formulario limpio para HTMX.
     """
     form = services.get_contact_form()
-    return render(request, 'core/partials/contact_form.html', {'form': form})
+    response = render(request, 'core/partials/contact_form.html', {'form': form})
+    response.headers['X-Robots-Tag'] = 'noindex, nofollow'
+    return response
 
 
 @require_POST
@@ -94,6 +120,31 @@ def contact(request: HttpRequest) -> HttpResponse:
     )
 
 
+def _build_legal_context():
+    return {
+        'fighter': services.get_active_fighter(),
+        'social_networks': services.get_active_social_networks(),
+    }
+
+
+@require_GET
+def legal_notice(request: HttpRequest) -> HttpResponse:
+    """Página de Aviso Legal (LSSI-CE)."""
+    return render(request, 'core/legal/aviso_legal.html', _build_legal_context())
+
+
+@require_GET
+def privacy_policy(request: HttpRequest) -> HttpResponse:
+    """Página de Política de Privacidad (RGPD y LOPDGDD)."""
+    return render(request, 'core/legal/politica_privacidad.html', _build_legal_context())
+
+
+@require_GET
+def cookie_policy(request: HttpRequest) -> HttpResponse:
+    """Página de Política de Cookies (LSSI-CE Art. 22.2 y Guía AEPD)."""
+    return render(request, 'core/legal/politica_cookies.html', _build_legal_context())
+
+
 def gallery(request: HttpRequest) -> HttpResponse:
     media_type = request.GET.get('type', 'foto')
 
@@ -107,4 +158,6 @@ def gallery(request: HttpRequest) -> HttpResponse:
         'media_type': media_type,
     }
 
-    return render(request, 'core/partials/gallery_items.html', context)
+    response = render(request, 'core/partials/gallery_items.html', context)
+    response.headers['X-Robots-Tag'] = 'noindex, nofollow'
+    return response

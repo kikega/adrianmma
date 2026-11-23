@@ -9,8 +9,9 @@ def csp_nonce(request: HttpRequest) -> dict[str, str]:
     }
 
 
-def site_features(request: HttpRequest) -> dict[str, bool]:
-    """Expone las banderas de funcionalidades del sitio a las plantillas."""
+def site_features(request: HttpRequest) -> dict[str, object]:
+    """Expone las banderas de funcionalidades y datos de contacto del sitio a las plantillas."""
     return {
         'private_classes_enabled': bool(getattr(settings, 'PRIVATE_CLASSES_ENABLED', True)),
+        'contact_email': getattr(settings, 'CONTACT_NOTIFICATION_EMAIL', 'contacto@adrigalvez.com'),
     }

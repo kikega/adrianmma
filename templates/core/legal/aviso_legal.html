@@ -1,0 +1,90 @@
+{% extends 'core/legal/base_legal.html' %}
+
+{% block title %}Aviso Legal | Adrián Gálvez{% endblock %}
+{% block meta_description %}Aviso legal de la página web personal de Adrián Gálvez conforme a la Ley 34/2002 (LSSI-CE). Sitio web informativo sin actividad económica.{% endblock %}
+{% block legal_kicker %}Ley 34/2002 (LSSI-CE){% endblock %}
+{% block legal_heading %}AVISO <span class="gold-text">LEGAL</span>{% endblock %}
+
+{% block legal_content %}
+<section class="space-y-3">
+    <h2 class="font-display text-xl sm:text-2xl font-bold text-white uppercase tracking-wide">
+        1. Datos identificativos y ausencia de actividad económica
+    </h2>
+    <p>
+        En cumplimiento de lo dispuesto en el artículo 10 de la <strong class="text-white">Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE)</strong>, se informa a las personas usuarias de los datos identificativos del titular del presente sitio web:
+    </p>
+    <ul class="list-disc pl-6 space-y-1.5 text-gray-200">
+        <li><strong class="text-white">Titular:</strong> Adrián Gálvez («The Butcher»)</li>
+        <li><strong class="text-white">Domicilio de referencia:</strong> Alicante, España</li>
+        <li><strong class="text-white">Correo electrónico de contacto:</strong> <a href="mailto:{{ fighter.email|default:contact_email }}" class="red-accent underline hover:text-white transition">{{ fighter.email|default:contact_email }}</a></li>
+        <li><strong class="text-white">Sitio web:</strong> https://adrigalvez.com</li>
+    </ul>
+    <div class="p-4 rounded-lg bg-red-950/30 border border-red-900/50 text-gray-200">
+        <p class="font-medium text-white mb-1">Carácter personal y ausencia de actividad económica</p>
+        <p class="text-sm leading-relaxed">
+            Este sitio web tiene un carácter <strong class="text-white">estrictamente personal, informativo y divulgativo</strong> sobre la trayectoria deportiva de su titular.
+            <strong class="text-white">No realiza ninguna actividad económica ni comercial, no tiene ánimo de lucro y no ofrece contratación electrónica de productos ni servicios</strong> a través de la web.
+        </p>
+    </div>
+</section>
+
+<section class="space-y-3">
+    <h2 class="font-display text-xl sm:text-2xl font-bold text-white uppercase tracking-wide">
+        2. Objeto y condiciones de acceso y uso
+    </h2>
+    <p>
+        El acceso y navegación por este sitio web es gratuito y atribuye la condición de persona usuaria, implicando la aceptación de las presentes condiciones desde el momento del acceso.
+    </p>
+    <p>
+        La persona usuaria se compromete a hacer un uso adecuado, lícito y respetuoso de los contenidos y del formulario de contacto, absteniéndose de emplearlos para actividades ilícitas, envío de correo no deseado (spam) o actuaciones que puedan dañar, inutilizar o sobrecargar el sitio web.
+    </p>
+</section>
+
+<section class="space-y-3">
+    <h2 class="font-display text-xl sm:text-2xl font-bold text-white uppercase tracking-wide">
+        3. Propiedad intelectual e industrial
+    </h2>
+    <p>
+        Todos los contenidos del sitio web (textos, fotografías, vídeos, diseños, código fuente y elementos gráficos) son titularidad de Adrián Gálvez o cuentan con la correspondiente autorización para su publicación. Queda prohibida su reproducción, distribución o comunicación pública sin autorización previa y expresa, salvo los usos permitidos por la normativa vigente.
+    </p>
+</section>
+
+<section class="space-y-3">
+    <h2 class="font-display text-xl sm:text-2xl font-bold text-white uppercase tracking-wide">
+        4. Enlaces a sitios de terceros
+    </h2>
+    <p>
+        Este sitio web puede incluir enlaces a plataformas externas (como redes sociales o Google Maps). El titular no controla ni asume responsabilidad alguna sobre los contenidos, políticas de privacidad o prácticas de dichos sitios de terceros.
+    </p>
+</section>
+
+<section class="space-y-3">
+    <h2 class="font-display text-xl sm:text-2xl font-bold text-white uppercase tracking-wide">
+        5. Exclusión de responsabilidad
+    </h2>
+    <p>
+        El titular no garantiza la ausencia de interrupciones temporales en el acceso al sitio web por causas técnicas o de mantenimiento, aunque adopta las medidas razonables de seguridad y disponibilidad.
+    </p>
+</section>
+
+<section class="space-y-3">
+    <h2 class="font-display text-xl sm:text-2xl font-bold text-white uppercase tracking-wide">
+        6. Protección de datos y cookies
+    </h2>
+    <p>
+        Toda la información relativa a la privacidad y al uso de cookies se encuentra detallada en nuestra
+        <a href="{% url 'core:privacy_policy' %}" class="red-accent underline hover:text-white transition">Política de Privacidad</a>
+        y nuestra
+        <a href="{% url 'core:cookie_policy' %}" class="red-accent underline hover:text-white transition">Política de Cookies</a>.
+    </p>
+</section>
+
+<section class="space-y-3">
+    <h2 class="font-display text-xl sm:text-2xl font-bold text-white uppercase tracking-wide">
+        7. Legislación aplicable y jurisdicción
+    </h2>
+    <p>
+        El presente Aviso Legal se rige en todos y cada uno de sus extremos por la legislación española vigente. Para la resolución de cualquier controversia que pudiera derivarse del acceso o uso del sitio web, las partes se someten a los juzgados y tribunales que resulten competentes conforme a la normativa aplicable.
+    </p>
+</section>
+{% endblock %}
